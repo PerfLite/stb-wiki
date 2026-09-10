@@ -1367,6 +1367,8 @@ const App = {
     const data = await this.fetchData('summons.json');
     if (!data) return;
 
+    const tiers = ['Все', 'Новичок', 'Ученик', 'Адепт', 'Эксперт', 'Мастер'];
+
     container.innerHTML = `
       <div class="section-header-box">
         <div class="section-header-left">
@@ -1374,37 +1376,74 @@ const App = {
           <p>Характеристики духов, големов и даэдра, урон, ауры и сопротивления</p>
         </div>
         <div class="section-controls">
+          <select id="summonTierSelect" class="filter-select">
+            ${tiers.map(t => `<option value="${t}">${t}</option>`).join('')}
+          </select>
           <input type="text" id="summonFilterInput" class="filter-input" placeholder="Поиск саммона...">
         </div>
       </div>
 
       <div class="cards-grid" id="summonsGrid">
-        ${data.map(s => `
-          <div class="info-card">
-            <div class="info-card-header">
-              <h3 class="info-card-title">${s.name}</h3>
-              <span class="info-card-badge gold">${s.tier}</span>
-            </div>
-            <div class="info-card-body">
-              <div style="margin-bottom: 8px; font-size: 0.88rem; color: var(--accent-blue);">
-                Уровень: ${s.level} | Здоровье: ${s.health} | Урон: ${s.damage}
+        ${data.map(s => {
+          const stats = [];
+          if (s.level) stats.push(`<span>Ур: <strong>${s.level}</strong></span>`);
+          if (s.health) stats.push(`<span>HP: <strong>${s.health}</strong></span>`);
+          if (s.damage) stats.push(`<span>Урон: <strong>${s.damage}</strong></span>`);
+          if (s.armor && s.armor !== '0') stats.push(`<span>Броня: <strong>${s.armor}</strong></span>`);
+          if (s.stamina && s.stamina !== '0') stats.push(`<span>Стамина: <strong>${s.stamina}</strong></span>`);
+          if (s.magicka && s.magicka !== '0') stats.push(`<span>Магия: <strong>${s.magicka}</strong></span>`);
+          if (s.speed) stats.push(`<span>Скорость: <strong>${s.speed}</strong></span>`);
+          if (s.cost) stats.push(`<span>Мана: <strong>${s.cost}</strong></span>`);
+
+          const resList = [];
+          if (s.resistances) {
+            if (s.resistances.fire && s.resistances.fire !== '0') resList.push(`🔥 Огонь: ${s.resistances.fire}%`);
+            if (s.resistances.frost && s.resistances.frost !== '0') resList.push(`❄️ Мороз: ${s.resistances.frost}%`);
+            if (s.resistances.shock && s.resistances.shock !== '0') resList.push(`⚡ Молния: ${s.resistances.shock}%`);
+            if (s.resistances.chaos && s.resistances.chaos !== '0') resList.push(`✨ Хаос: ${s.resistances.chaos}%`);
+          }
+
+          const cleanAbilities = (s.abilities && s.abilities.trim() !== '-' && !s.abilities.startsWith('#')) ? s.abilities.trim() : '';
+
+          return `
+            <div class="info-card summon-card" data-tier="${s.tier}">
+              <div class="info-card-header">
+                <h3 class="info-card-title">${s.name}</h3>
+                <span class="info-card-badge gold">${s.tier}</span>
               </div>
-              <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">
-                Броня: ${s.armor || '0'} | Огонь: ${s.resistances.fire}% | Мороз: ${s.resistances.frost}% | Молния: ${s.resistances.shock}%
+              <div class="info-card-body">
+                <div class="summon-stats-chips">
+                  ${stats.join('')}
+                </div>
+                ${resList.length > 0 ? `
+                  <div class="summon-res-chips">
+                    ${resList.map(r => `<span class="res-chip">${r}</span>`).join('')}
+                  </div>
+                ` : ''}
+                ${cleanAbilities ? `
+                  <div class="summon-abilities">${cleanAbilities}</div>
+                ` : ''}
               </div>
-              ${s.abilities ? `<div style="font-size: 0.88rem; color: var(--text-main); white-space: pre-line;">${s.abilities}</div>` : ''}
             </div>
-          </div>
-        `).join('')}
+          `;
+        }).join('')}
       </div>
     `;
 
-    document.getElementById('summonFilterInput')?.addEventListener('input', (e) => {
-      const q = e.target.value.toLowerCase();
-      document.querySelectorAll('#summonsGrid .info-card').forEach(card => {
-        card.style.display = card.innerText.toLowerCase().includes(q) ? 'flex' : 'none';
+    const filterSummons = () => {
+      const tier = document.getElementById('summonTierSelect')?.value || 'Все';
+      const q = (document.getElementById('summonFilterInput')?.value || '').toLowerCase();
+      document.querySelectorAll('#summonsGrid .summon-card').forEach(card => {
+        const cardTier = card.getAttribute('data-tier');
+        const text = card.innerText.toLowerCase();
+        const tierMatch = (tier === 'Все' || cardTier === tier);
+        const textMatch = text.includes(q);
+        card.style.display = (tierMatch && textMatch) ? 'flex' : 'none';
       });
-    });
+    };
+
+    document.getElementById('summonTierSelect')?.addEventListener('change', filterSummons);
+    document.getElementById('summonFilterInput')?.addEventListener('input', filterSummons);
   },
 
   // -------------------------------------------------------------
@@ -1466,7 +1505,7 @@ const App = {
   },
 
   // -------------------------------------------------------------
-  // 13. UNIQUES (740+ items)
+  // 13. UNIQUES (680 items)
   // -------------------------------------------------------------
   async renderUniques(container) {
     const data = await this.fetchData('uniques.json');
@@ -1478,9 +1517,13 @@ const App = {
       <div class="section-header-box">
         <div class="section-header-left">
           <h2>💎 Уникальные предметы и артефакты</h2>
-          <p>Маски жрецов, даэдрические реликвии, редкие амулеты и консольные FormID</p>
+          <p>Маски жрецов, сеты доспехов, артефакты, оружие, реликвии и FormID</p>
         </div>
         <div class="section-controls">
+          <div class="view-switcher" id="uniqueViewSwitcher">
+            <button class="view-btn active" id="btnViewTable">▦ Таблица</button>
+            <button class="view-btn" id="btnViewCards">🗂️ Карточки</button>
+          </div>
           <select id="uniqueCatSelect" class="filter-select">
             ${categories.map(c => `<option value="${c}">${c}</option>`).join('')}
           </select>
@@ -1488,56 +1531,131 @@ const App = {
         </div>
       </div>
 
-      <div style="margin-bottom: 12px; font-size: 0.85rem; color: var(--text-muted);">
-        Нажмите на <span class="copy-badge">FormID</span>, чтобы скопировать команду <code>player.additem ID 1</code>
+      <div style="margin-bottom: 12px; font-size: 0.85rem; color: var(--text-muted); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+        <span>Нажмите на <span class="copy-badge">FormID</span>, чтобы скопировать команду <code>player.additem ID 1</code></span>
+        <span id="uniquesCountBadge" style="color: var(--accent-gold); font-weight: 500;">Показано: ${data.length} из ${data.length}</span>
       </div>
 
-      <div class="table-responsive">
+      <!-- TABLE VIEW -->
+      <div class="table-responsive" id="uniquesTableWrap">
         <table class="wiki-table" id="uniquesTable">
           <thead>
             <tr>
-              <th>Название</th>
-              <th>Категория</th>
-              <th>Уникальный эффект / Зачарование</th>
-              <th>Броня / Урон</th>
-              <th>Вес</th>
-              <th>Локация / Квест</th>
-              <th>FormID</th>
+              <th class="col-uniq-name">Название</th>
+              <th class="col-uniq-cat">Категория</th>
+              <th class="col-uniq-effect">Уникальный эффект / Описание</th>
+              <th class="col-uniq-stats">Броня / Урон</th>
+              <th class="col-uniq-weight">Вес</th>
+              <th class="col-uniq-loc">Локация / Квест</th>
+              <th class="col-uniq-id">FormID</th>
             </tr>
           </thead>
           <tbody>
-            ${data.map(u => `
-              <tr data-cat="${u.category}">
-                <td><strong>${u.name}</strong></td>
-                <td><span class="info-card-badge">${u.category}</span></td>
-                <td style="white-space: pre-line;">${u.effect}</td>
-                <td>${u.stats || '-'}</td>
-                <td>${u.weight || '-'}</td>
-                <td style="color: var(--accent-cyan);">${u.location || '-'}</td>
-                <td>
-                  ${u.form_id ? `
-                    <span class="copy-badge" onclick="App.copyToClipboard('player.additem ${u.form_id} 1', 'Команда получения ${u.name} скопирована!')">
-                      ${u.form_id}
-                    </span>
-                  ` : '-'}
-                </td>
-              </tr>
-            `).join('')}
+            ${data.map(u => {
+              const safeName = (u.name || '').replace(/'/g, "\\'");
+              return `
+                <tr data-cat="${u.category}">
+                  <td><strong>${u.name}</strong></td>
+                  <td><span class="info-card-badge">${u.category}</span></td>
+                  <td class="col-uniq-effect-cell" style="white-space: pre-line;">${u.effect || '-'}</td>
+                  <td class="col-center">${u.stats || '-'}</td>
+                  <td class="col-center">${u.weight || '-'}</td>
+                  <td style="color: var(--accent-cyan); font-size: 0.85rem; white-space: pre-line;">${u.location || '-'}</td>
+                  <td>
+                    ${u.form_id ? `
+                      <span class="copy-badge" onclick="App.copyToClipboard('player.additem ${u.form_id} 1', 'Команда получения ${safeName} скопирована!')" title="Скопировать команду">
+                        ${u.form_id}
+                      </span>
+                    ` : '-'}
+                  </td>
+                </tr>
+              `;
+            }).join('')}
           </tbody>
         </table>
       </div>
+
+      <!-- CARDS VIEW -->
+      <div class="cards-grid" id="uniquesCardsWrap" style="display: none;">
+        ${data.map(u => {
+          const safeName = (u.name || '').replace(/'/g, "\\'");
+          return `
+            <div class="info-card unique-card-item" data-cat="${u.category}">
+              <div class="info-card-header">
+                <h3 class="info-card-title">${u.name}</h3>
+                <span class="info-card-badge gold">${u.category}</span>
+              </div>
+              <div class="info-card-body">
+                ${u.effect ? `<div style="font-size: 0.88rem; color: var(--text-main); margin-bottom: 10px; line-height: 1.4; white-space: pre-line;">${u.effect}</div>` : ''}
+                <div style="display: flex; gap: 8px; flex-wrap: wrap; font-size: 0.84rem; color: var(--text-muted); margin-bottom: 8px;">
+                  ${u.stats ? `<span>Броня/Урон: <strong style="color: var(--accent-gold);">${u.stats}</strong></span>` : ''}
+                  ${u.weight ? `<span>Вес: <strong>${u.weight}</strong></span>` : ''}
+                  ${u.price ? `<span>Цена: <strong>${u.price} з.</strong></span>` : ''}
+                </div>
+                ${u.location ? `<div style="font-size: 0.83rem; color: var(--accent-cyan); margin-bottom: 8px; white-space: pre-line;">📍 ${u.location}</div>` : ''}
+                ${u.form_id ? `
+                  <div style="margin-top: auto; padding-top: 8px;">
+                    <span class="copy-badge" onclick="App.copyToClipboard('player.additem ${u.form_id} 1', 'Команда получения ${safeName} скопирована!')" title="Скопировать команду">
+                      ${u.form_id}
+                    </span>
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+          `;
+        }).join('')}
+      </div>
     `;
+
+    // View switcher logic
+    const btnTable = document.getElementById('btnViewTable');
+    const btnCards = document.getElementById('btnViewCards');
+    const tableWrap = document.getElementById('uniquesTableWrap');
+    const cardsWrap = document.getElementById('uniquesCardsWrap');
+
+    btnTable?.addEventListener('click', () => {
+      btnTable.classList.add('active');
+      btnCards.classList.remove('active');
+      tableWrap.style.display = 'block';
+      cardsWrap.style.display = 'none';
+    });
+
+    btnCards?.addEventListener('click', () => {
+      btnCards.classList.add('active');
+      btnTable.classList.remove('active');
+      tableWrap.style.display = 'none';
+      cardsWrap.style.display = 'grid';
+    });
 
     const filterFn = () => {
       const cat = document.getElementById('uniqueCatSelect').value;
-      const q = document.getElementById('uniqueSearchInput').value.toLowerCase();
+      const q = (document.getElementById('uniqueSearchInput').value || '').toLowerCase();
+      let shownCount = 0;
+
+      // Filter table rows
       document.querySelectorAll('#uniquesTable tbody tr').forEach(tr => {
         const itemCat = tr.getAttribute('data-cat');
         const text = tr.innerText.toLowerCase();
         const catMatch = (cat === 'Все' || itemCat === cat);
         const textMatch = text.includes(q);
-        tr.style.display = (catMatch && textMatch) ? '' : 'none';
+        const isVisible = catMatch && textMatch;
+        tr.style.display = isVisible ? '' : 'none';
+        if (isVisible) shownCount++;
       });
+
+      // Filter cards
+      document.querySelectorAll('#uniquesCardsWrap .unique-card-item').forEach(card => {
+        const itemCat = card.getAttribute('data-cat');
+        const text = card.innerText.toLowerCase();
+        const catMatch = (cat === 'Все' || itemCat === cat);
+        const textMatch = text.includes(q);
+        card.style.display = (catMatch && textMatch) ? 'flex' : 'none';
+      });
+
+      const countBadge = document.getElementById('uniquesCountBadge');
+      if (countBadge) {
+        countBadge.innerText = `Показано: ${shownCount} из ${data.length}`;
+      }
     };
 
     document.getElementById('uniqueCatSelect')?.addEventListener('change', filterFn);

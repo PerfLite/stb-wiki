@@ -721,7 +721,7 @@ for r, row in enumerate(ws_spells.iter_rows(values_only=True)):
         "dual_cast": dual,
         "power": dmg,
         "effect": effect,
-        "form_id": form_id,
+        "form_id": "" if form_id.startswith('#') else form_id,
         "cast_time": cast_time,
         "price": price
     })
@@ -736,6 +736,20 @@ print("Exporting summons...")
 ws_sum = wb['👻Самоны']
 summons_list = []
 current_sum_tier = "Новичок"
+
+def clean_stat_val(val):
+    if val is None:
+        return ""
+    s = str(val).strip()
+    if not s or s == '-' or s.startswith('#'):
+        return ""
+    try:
+        f = float(s)
+        if f.is_integer():
+            return str(int(f))
+        return f"{f:.1f}"
+    except ValueError:
+        return s
 
 for r, row in enumerate(ws_sum.iter_rows(values_only=True)):
     if r < 4:
@@ -752,21 +766,24 @@ for r, row in enumerate(ws_sum.iter_rows(values_only=True)):
     elif 'Мастер' in c2:
         current_sum_tier = "Мастер"
         
-    if not c2 or c2.startswith('база') or 'Новичок' in c2 or 'Ученик' in c2 or 'Адепт' in c2 or 'Эксперт' in c2 or 'Мастер' in c2:
+    if not c2 or c2.startswith('база') or any(t in c2 for t in ['Новичок', 'Ученик', 'Адепт', 'Эксперт', 'Мастер']):
         continue
         
-    cost = str(row[3] or '').strip() if len(row) > 3 else ''
-    lvl = str(row[8] or '').strip() if len(row) > 8 else ''
-    hp = str(row[9] or '').strip() if len(row) > 9 else ''
-    stamina = str(row[10] or '').strip() if len(row) > 10 else ''
-    magicka = str(row[11] or '').strip() if len(row) > 11 else ''
-    dmg = str(row[12] or '').strip() if len(row) > 12 else ''
-    armor = str(row[19] or '').strip() if len(row) > 19 else ''
-    res_fire = str(row[20] or '').strip() if len(row) > 20 else ''
-    res_frost = str(row[21] or '').strip() if len(row) > 21 else ''
-    res_shock = str(row[22] or '').strip() if len(row) > 22 else ''
-    res_chaos = str(row[23] or '').strip() if len(row) > 23 else ''
-    abilities = str(row[27] or '').strip() if len(row) > 27 else ''
+    cost = clean_stat_val(row[3]) if len(row) > 3 else ''
+    lvl = clean_stat_val(row[10]) if len(row) > 10 else ''
+    hp = clean_stat_val(row[11]) if len(row) > 11 else ''
+    stamina = clean_stat_val(row[12]) if len(row) > 12 else ''
+    magicka = clean_stat_val(row[13]) if len(row) > 13 else ''
+    dmg = clean_stat_val(row[14]) if len(row) > 14 else ''
+    armor = clean_stat_val(row[20]) if len(row) > 20 else ''
+    res_fire = clean_stat_val(row[21]) if len(row) > 21 else ''
+    res_frost = clean_stat_val(row[22]) if len(row) > 22 else ''
+    res_shock = clean_stat_val(row[23]) if len(row) > 23 else ''
+    res_chaos = clean_stat_val(row[24]) if len(row) > 24 else ''
+    spd = clean_stat_val(row[28]) if len(row) > 28 else ''
+    abilities = str(row[29] or '').strip() if len(row) > 29 else ''
+    if abilities == '-' or abilities.startswith('#'):
+        abilities = ''
     
     summons_list.append({
         "name": c2,
@@ -778,6 +795,7 @@ for r, row in enumerate(ws_sum.iter_rows(values_only=True)):
         "magicka": magicka,
         "damage": dmg,
         "armor": armor,
+        "speed": spd,
         "resistances": {
             "fire": res_fire,
             "frost": res_frost,
@@ -838,23 +856,29 @@ print("Exporting uniques...")
 ws_u = wb['💎Уники']
 uniques_list = []
 cur_cat = "Уникальные предметы"
+cur_set = ""
+cur_set_effect = ""
+cur_set_location = ""
 
 for r, row in enumerate(ws_u.iter_rows(values_only=True)):
     if r < 2:
         continue
     c2 = str(row[2] or '').strip() if len(row) > 2 else ''
-    c3 = str(row[3] or '').strip() if len(row) > 3 else ''
-    
-    if c2 and not c3:
-        cur_cat = c2
-        continue
-        
     if not c2 or c2 == 'Название':
         continue
         
+    # Check if this row is a pure category header (only c2 has value, c3..c14 are empty)
+    has_other_data = any(row[i] is not None and str(row[i]).strip() != '' for i in range(3, min(len(row), 15)))
+    if not has_other_data:
+        cat_name = c2.split('\n')[0].strip()
+        cur_cat = cat_name
+        cur_set = ""
+        cur_set_effect = ""
+        cur_set_location = ""
+        continue
+
+    c3 = str(row[3] or '').strip() if len(row) > 3 else ''
     mat = str(row[4] or '').strip() if len(row) > 4 else ''
-    tier_ench = str(row[5] or '').strip() if len(row) > 5 else ''
-    ench_count = str(row[6] or '').strip() if len(row) > 6 else ''
     loc_tier = str(row[7] or '').strip() if len(row) > 7 else ''
     stats = str(row[8] or '').strip() if len(row) > 8 else ''
     weight = str(row[9] or '').strip() if len(row) > 9 else ''
@@ -862,17 +886,36 @@ for r, row in enumerate(ws_u.iter_rows(values_only=True)):
     location = str(row[13] or '').strip() if len(row) > 13 else ''
     form_id = str(row[14] or '').strip() if len(row) > 14 else ''
     
+    # Handle sets (heavy, light, clothes)
+    set_pieces = ['Шлем', 'Кираса', 'Броня', 'Перчатки', 'Перчаки', 'Сапоги', 'Капюшон', 'Одеяние', 'Роба', 'Наручи', 'Корона']
+    if 'Сеты' in cur_cat:
+        if c2 in set_pieces:
+            item_name = f"{cur_set}: {c2}" if cur_set else c2
+            item_effect = c3 if c3 else (f"Часть комплекта: {cur_set}" if cur_set else "")
+            item_loc = location if location else cur_set_location
+        else:
+            cur_set = c2.split('\n')[0].strip()
+            cur_set_effect = c3
+            cur_set_location = location
+            item_name = c2
+            item_effect = c3
+            item_loc = location
+    else:
+        item_name = c2
+        item_effect = c3
+        item_loc = location
+
     uniques_list.append({
         "category": cur_cat,
-        "name": c2,
-        "effect": c3,
+        "name": item_name,
+        "effect": item_effect,
         "material": mat,
         "location_tier": loc_tier,
         "stats": stats,
         "weight": weight,
         "price": price,
-        "location": location,
-        "form_id": form_id
+        "location": item_loc,
+        "form_id": "" if form_id.startswith('#') else form_id
     })
 
 with open(f"{DATA_DIR}/uniques.json", "w", encoding="utf-8") as f:

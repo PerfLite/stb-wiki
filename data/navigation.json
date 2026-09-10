@@ -1,0 +1,70 @@
+{
+  "title": "Skyrim True Believer",
+  "subtitle": "Полная интерактивная база данных и энциклопедия сборки STB 3.0",
+  "version": "3.0",
+  "update_note": "Изменения текущей версии во вкладках окрашены зеленым",
+  "test_room": "coc dev",
+  "developers": [
+    {
+      "name": "Sneyk",
+      "role": "Основной разработчик"
+    },
+    {
+      "name": "MoonDream",
+      "role": "Основной разработчик"
+    },
+    {
+      "name": "Polaris",
+      "role": "Основной разработчик"
+    },
+    {
+      "name": "KBA3AP",
+      "role": "Основной разработчик"
+    },
+    {
+      "name": "Мельче",
+      "role": "Разработчик"
+    },
+    {
+      "name": "Nikita",
+      "role": "Разработчик"
+    },
+    {
+      "name": "Frem",
+      "role": "Разработчик"
+    }
+  ],
+  "helpers": [
+    "StarkMP",
+    "Мастер Изгой Егор",
+    "Sewhass"
+  ],
+  "artists": [
+    "SUNBARDO",
+    "silk_911",
+    "leonhetch"
+  ],
+  "sponsors": [
+    "Глубже",
+    "silk_911",
+    "leonhetch"
+  ],
+  "socials": [
+    {
+      "name": "Boosty",
+      "url": "https://boosty.to/skyrimtruebeliever",
+      "icon": "assets/img/image1.png"
+    },
+    {
+      "name": "Discord",
+      "url": "https://discord.gg/",
+      "icon": "assets/img/image2.png"
+    },
+    {
+      "name": "Patreon",
+      "url": "https://www.patreon.com/",
+      "icon": "assets/img/image3.png"
+    }
+  ],
+  "banner": "assets/img/image30.png"
+}

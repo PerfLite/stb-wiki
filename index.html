@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skyrim True Believer 3.0 — Интерактивная база данных и руководство</title>
+  <meta name="description" content="Полная интерактивная энциклопедия и база данных по сборке Skyrim True Believer (STB 3.0): механики, ветки способностей, уникальные предметы, магия, аэдра и даэдра.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/img/image4.png">
+</head>
+<body>
+
+<div class="app-container">
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="assets/img/image4.png" alt="STB Logo" class="logo-icon" onerror="this.style.display='none'">
+      <div class="brand-info">
+        <h1>STB 3.0 Wiki</h1>
+        <span class="brand-badge">True Believer</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Основное</div>
+      <a href="#overview" class="nav-item active" data-view="overview">
+        <div class="nav-item-left">
+          <span class="nav-icon">🏰</span>
+          <span>Главная</span>
+        </div>
+      </a>
+
+      <a href="#base" class="nav-item" data-view="base">
+        <div class="nav-item-left">
+          <span class="nav-icon">📚</span>
+          <span>База и механики</span>
+        </div>
+        <span class="nav-badge">20</span>
+      </a>
+
+      <a href="#races_stones" class="nav-item" data-view="races_stones">
+        <div class="nav-item-left">
+          <span class="nav-icon">🗿</span>
+          <span>Расы и Камни</span>
+        </div>
+        <span class="nav-badge">19</span>
+      </a>
+
+      <div class="nav-section-title">Пантеон и Боги</div>
+      <a href="#aedra" class="nav-item" data-view="aedra">
+        <div class="nav-item-left">
+          <span class="nav-icon">😇</span>
+          <span>Аэдра</span>
+        </div>
+        <span class="nav-badge">9</span>
+      </a>
+
+      <a href="#daedra" class="nav-item" data-view="daedra">
+        <div class="nav-item-left">
+          <span class="nav-icon">😈</span>
+          <span>Даэдра</span>
+        </div>
+        <span class="nav-badge">16</span>
+      </a>
+
+      <a href="#cursed" class="nav-item" data-view="cursed">
+        <div class="nav-item-left">
+          <span class="nav-icon">🧛</span>
+          <span>Проклятые</span>
+        </div>
+        <span class="nav-badge">2</span>
+      </a>
+
+      <div class="nav-section-title">Прокачка и Перки</div>
+      <a href="#perks" class="nav-item" data-view="perks">
+        <div class="nav-item-left">
+          <span class="nav-icon">⭐</span>
+          <span>Ветки способностей</span>
+        </div>
+        <span class="nav-badge">18</span>
+      </a>
+
+      <a href="#black_books" class="nav-item" data-view="black_books">
+        <div class="nav-item-left">
+          <span class="nav-icon">🏆</span>
+          <span>Черные книги</span>
+        </div>
+        <span class="nav-badge">7</span>
+      </a>
+
+      <div class="nav-section-title">Арсенал и Магия</div>
+      <a href="#spells_shouts" class="nav-item" data-view="spells_shouts">
+        <div class="nav-item-left">
+          <span class="nav-icon">🌈</span>
+          <span>Заклинания / Ту'умы</span>
+        </div>
+        <span class="nav-badge">590+</span>
+      </a>
+
+      <a href="#summons" class="nav-item" data-view="summons">
+        <div class="nav-item-left">
+          <span class="nav-icon">👻</span>
+          <span>Призывы (Саммоны)</span>
+        </div>
+      </a>
+
+      <a href="#equipment" class="nav-item" data-view="equipment">
+        <div class="nav-item-left">
+          <span class="nav-icon">⚔️</span>
+          <span>Оружие и Броня</span>
+        </div>
+      </a>
+
+      <a href="#uniques" class="nav-item" data-view="uniques">
+        <div class="nav-item-left">
+          <span class="nav-icon">💎</span>
+          <span>Уникальные предметы</span>
+        </div>
+        <span class="nav-badge">740+</span>
+      </a>
+
+      <a href="#consumables" class="nav-item" data-view="consumables">
+        <div class="nav-item-left">
+          <span class="nav-icon">🧪</span>
+          <span>Расходники / Алхимия</span>
+        </div>
+      </a>
+
+      <a href="#enchantments" class="nav-item" data-view="enchantments">
+        <div class="nav-item-left">
+          <span class="nav-icon">✨</span>
+          <span>Зачарования</span>
+        </div>
+      </a>
+
+      <div class="nav-section-title">Система и Прогресс</div>
+      <a href="#difficulty" class="nav-item" data-view="difficulty">
+        <div class="nav-item-left">
+          <span class="nav-icon">🥇</span>
+          <span>Сложность</span>
+        </div>
+        <span class="nav-badge">4</span>
+      </a>
+
+      <a href="#quest_rewards" class="nav-item" data-view="quest_rewards">
+        <div class="nav-item-left">
+          <span class="nav-icon">💰</span>
+          <span>Награды за квесты</span>
+        </div>
+        <span class="nav-badge">2150м</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="https://boosty.to/skyrimtruebeliever" target="_blank" rel="noopener" class="social-btn">
+        <img src="assets/img/image1.png" alt="Boosty" onerror="this.style.display='none'">
+        <span>Boosty</span>
+      </a>
+      <a href="https://discord.gg/" target="_blank" rel="noopener" class="social-btn">
+        <img src="assets/img/image2.png" alt="Discord" onerror="this.style.display='none'">
+        <span>Discord</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main Content Wrapper -->
+  <div class="main-content">
+    <!-- Top Sticky Header -->
+    <header class="top-header">
+      <div class="header-left">
+        <button class="menu-toggle-btn" id="menuToggleBtn" aria-label="Открыть меню">☰</button>
+        <div class="search-trigger-box" id="searchTrigger">
+          <span class="search-icon">🔍</span>
+          <span class="search-text">Поиск по базе...</span>
+          <span class="search-shortcut">Ctrl+K</span>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <button class="header-btn" id="favTriggerBtn">
+          <span>★</span>
+          <span>Закладки</span>
+        </button>
+        <button class="header-btn highlight" onclick="App.copyToClipboard('coc dev', 'Команда coc dev скопирована в буфер!')">
+          <span>🧪</span>
+          <span>coc dev</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Dynamic View Content Container -->
+    <main class="page-container" id="viewContent">
+      <!-- Injected by app.js -->
+    </main>
+  </div>
+</div>
+
+<!-- Global Search Modal -->
+<div class="modal-backdrop" id="searchModal">
+  <div class="modal-box search-modal-box">
+    <div class="search-input-wrap">
+      <span style="font-size: 1.2rem; color: var(--accent-gold); margin-right: 12px;">🔍</span>
+      <input type="text" id="searchModalInput" class="search-modal-input" placeholder="Поиск способностей, уникальных предметов, формул, заклинаний..." autocomplete="off">
+      <button class="modal-close" id="searchClose" aria-label="Закрыть">✕</button>
+    </div>
+    <div class="search-results-list" id="searchResultsList">
+      <!-- Search results dynamic list -->
+    </div>
+  </div>
+</div>
+
+<!-- Favorites Modal -->
+<div class="modal-backdrop" id="favoritesModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>★ Мои сохраненные закладки</h3>
+      <button class="modal-close" id="favoritesClose">✕</button>
+    </div>
+    <div class="modal-body" id="favoritesList">
+      <!-- Favorites list -->
+    </div>
+  </div>
+</div>
+
+<!-- Application Logic -->
+<script src="assets/js/app.js"></script>
+
+</body>
+</html>

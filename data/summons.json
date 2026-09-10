@@ -1,0 +1,2126 @@
+[
+  {
+    "name": "Дух злокрыса (уник)",
+    "tier": "Новичок",
+    "cost": "100.0",
+    "level": "9.419408266",
+    "health": "9.419408266",
+    "stamina": "2.0",
+    "magicka": "120.0",
+    "damage": "500.0",
+    "armor": "1.776031078",
+    "resistances": {
+      "fire": "",
+      "frost": "",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Дух грязекраба",
+    "tier": "Новичок",
+    "cost": "200.0",
+    "level": "21.13431272",
+    "health": "10.56715636",
+    "stamina": "6.0",
+    "magicka": "325.0",
+    "damage": "1000.0",
+    "armor": "-3.996418154",
+    "resistances": {
+      "fire": "500.0",
+      "frost": "",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "⇑Дух силь. мол. грязек.",
+    "tier": "Новичок",
+    "cost": "",
+    "level": "#NUM!",
+    "health": "#NUM!",
+    "stamina": "8.0",
+    "magicka": "250.0",
+    "damage": "1000.0",
+    "armor": "#NUM!",
+    "resistances": {
+      "fire": "30.0",
+      "frost": "20.0",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Дух волка",
+    "tier": "Новичок",
+    "cost": "100.0",
+    "level": "9.573412466",
+    "health": "9.573412466",
+    "stamina": "7.0",
+    "magicka": "120.0",
+    "damage": "1000.0",
+    "armor": "2.055035279",
+    "resistances": {
+      "fire": "",
+      "frost": "",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "⇑Дух сильного волка",
+    "tier": "Новичок",
+    "cost": "",
+    "level": "#NUM!",
+    "health": "#NUM!",
+    "stamina": "10.0",
+    "magicka": "150.0",
+    "damage": "1000.0",
+    "armor": "#NUM!",
+    "resistances": {
+      "fire": "",
+      "frost": "",
+      "shock": "10.0",
+      "chaos": "5.0"
+    },
+    "abilities": "10.0"
+  },
+  {
+    "name": "Дух морозного паука",
+    "tier": "Новичок",
+    "cost": "100.0",
+    "level": "9.457159234",
+    "health": "9.457159234",
+    "stamina": "8.0",
+    "magicka": "145.0",
+    "damage": "1000.0",
+    "armor": "1.105448714",
+    "resistances": {
+      "fire": "",
+      "frost": "",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "⇑Дух сильного паука",
+    "tier": "Новичок",
+    "cost": "",
+    "level": "#NUM!",
+    "health": "#NUM!",
+    "stamina": "10.0",
+    "magicka": "150.0",
+    "damage": "1000.0",
+    "armor": "#NUM!",
+    "resistances": {
+      "fire": "",
+      "frost": "",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Скелет-защитник",
+    "tier": "Новичок",
+    "cost": "100.0",
+    "level": "10.18903969",
+    "health": "10.18903969",
+    "stamina": "8.0",
+    "magicka": "160.0",
+    "damage": "10000.0",
+    "armor": "-0.162670835",
+    "resistances": {
+      "fire": "300.0",
+      "frost": "",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Скелет-лучник",
+    "tier": "Новичок",
+    "cost": "100.0",
+    "level": "10.07560859",
+    "health": "10.07560859",
+    "stamina": "7.0",
+    "magicka": "120.0",
+    "damage": "10000.0",
+    "armor": "1.557231404",
+    "resistances": {
+      "fire": "200.0",
+      "frost": "",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Упырь",
+    "tier": "Новичок",
+    "cost": "100.0",
+    "level": "10.35171052",
+    "health": "10.35171052",
+    "stamina": "9.0",
+    "magicka": "190.0",
+    "damage": "10000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "100.0",
+      "frost": "",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Голем из плоти (моделька меняется с перков)",
+    "tier": "Новичок",
+    "cost": "200.0",
+    "level": "16.79091808",
+    "health": "8.395459042",
+    "stamina": "10.0",
+    "magicka": "180.0",
+    "damage": "10000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "",
+      "frost": "",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Скамп",
+    "tier": "Новичок",
+    "cost": "100.0",
+    "level": "9.367275258",
+    "health": "9.367275258",
+    "stamina": "9.0",
+    "magicka": "125.0",
+    "damage": "300.0",
+    "armor": "1.557231404",
+    "resistances": {
+      "fire": "",
+      "frost": "100.0",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": "10.0"
+  },
+  {
+    "name": "Даэдра-паук",
+    "tier": "Новичок",
+    "cost": "100.0",
+    "level": "",
+    "health": "",
+    "stamina": "8.0",
+    "magicka": "170.0",
+    "damage": "1000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "",
+      "frost": "100.0",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Дремора-керл",
+    "tier": "Новичок",
+    "cost": "100.0",
+    "level": "",
+    "health": "",
+    "stamina": "9.0",
+    "magicka": "150.0",
+    "damage": "300.0",
+    "armor": "",
+    "resistances": {
+      "fire": "",
+      "frost": "100.0",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": "10.0"
+  },
+  {
+    "name": "Кланфир\nмили скелет вервольфа",
+    "tier": "Новичок",
+    "cost": "200.0",
+    "level": "20.04038193",
+    "health": "10.02019096",
+    "stamina": "10.0",
+    "magicka": "310.0",
+    "damage": "1000.0",
+    "armor": "-2.719568903",
+    "resistances": {
+      "fire": "200.0",
+      "frost": "100.0",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "⇑Дух сильного злокрыса",
+    "tier": "Новичок",
+    "cost": "",
+    "level": "#VALUE!",
+    "health": "#VALUE!",
+    "stamina": "3.0",
+    "magicka": "90.0",
+    "damage": "500.0",
+    "armor": "",
+    "resistances": {
+      "fire": "",
+      "frost": "",
+      "shock": "10.0",
+      "chaos": "5.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Дух пепельного прыгуна (уник)",
+    "tier": "Ученик",
+    "cost": "200.0",
+    "level": "21.08166594",
+    "health": "10.54083297",
+    "stamina": "13.0",
+    "magicka": "215.0",
+    "damage": "1000.0",
+    "armor": "2.374081184",
+    "resistances": {
+      "fire": "",
+      "frost": "200.0",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Дух большого грязекраба",
+    "tier": "Ученик",
+    "cost": "400.0",
+    "level": "37.23361549",
+    "health": "9.308403871",
+    "stamina": "14.0",
+    "magicka": "550.0",
+    "damage": "1000.0",
+    "armor": "-3.68945592",
+    "resistances": {
+      "fire": "1000.0",
+      "frost": "",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "⇑Дух силь. взрос. гряз.",
+    "tier": "Ученик",
+    "cost": "",
+    "level": "#NUM!",
+    "health": "#NUM!",
+    "stamina": "16.0",
+    "magicka": "425.0",
+    "damage": "1000.0",
+    "armor": "#NUM!",
+    "resistances": {
+      "fire": "40.0",
+      "frost": "20.0",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": "10.0"
+  },
+  {
+    "name": "Дух снежного волка",
+    "tier": "Ученик",
+    "cost": "200.0",
+    "level": "20.91058028",
+    "health": "10.45529014",
+    "stamina": "16.0",
+    "magicka": "215.0",
+    "damage": "1000.0",
+    "armor": "1.702995524",
+    "resistances": {
+      "fire": "100.0",
+      "frost": "",
+      "shock": "200.0",
+      "chaos": ""
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Дух коруса",
+    "tier": "Ученик",
+    "cost": "200.0",
+    "level": "20.81303347",
+    "health": "10.40651673",
+    "stamina": "15.0",
+    "magicka": "190.0",
+    "damage": "1000.0",
+    "armor": "1.938782047",
+    "resistances": {
+      "fire": "200.0",
+      "frost": "",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "⇑Дух сильного коруса",
+    "tier": "Ученик",
+    "cost": "",
+    "level": "#NUM!",
+    "health": "#NUM!",
+    "stamina": "17.0",
+    "magicka": "250.0",
+    "damage": "1000.0",
+    "armor": "#NUM!",
+    "resistances": {
+      "fire": "25.0",
+      "frost": "30.0",
+      "shock": "",
+      "chaos": "35.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Скелет-воин",
+    "tier": "Ученик",
+    "cost": "200.0",
+    "level": "21.00835121",
+    "health": "10.50417561",
+    "stamina": "18.0",
+    "magicka": "250.0",
+    "damage": "10000.0",
+    "armor": "0.134099796",
+    "resistances": {
+      "fire": "200.0",
+      "frost": "",
+      "shock": "100.0",
+      "chaos": ""
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Скелет-маг (3 по стихиям)",
+    "tier": "Ученик",
+    "cost": "200.0",
+    "level": "19.98475714",
+    "health": "9.992378568",
+    "stamina": "17.0",
+    "magicka": "200.0",
+    "damage": "10000.0",
+    "armor": "1.277172384",
+    "resistances": {
+      "fire": "",
+      "frost": "100.0",
+      "shock": "200.0",
+      "chaos": "100.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Низший бес пламени",
+    "tier": "Ученик",
+    "cost": "200.0",
+    "level": "",
+    "health": "",
+    "stamina": "17.0",
+    "magicka": "230.0",
+    "damage": "1000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "100.0",
+      "frost": "",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": "50.0"
+  },
+  {
+    "name": "Низший бес молний",
+    "tier": "Ученик",
+    "cost": "200.0",
+    "level": "",
+    "health": "",
+    "stamina": "17.0",
+    "magicka": "230.0",
+    "damage": "1000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "100.0",
+      "frost": "100.0",
+      "shock": "",
+      "chaos": "100.0"
+    },
+    "abilities": "50.0"
+  },
+  {
+    "name": "Дремора-кайтиф",
+    "tier": "Ученик",
+    "cost": "200.0",
+    "level": "",
+    "health": "",
+    "stamina": "19.0",
+    "magicka": "260.0",
+    "damage": "600.0",
+    "armor": "",
+    "resistances": {
+      "fire": "200.0",
+      "frost": "100.0",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": "20.0"
+  },
+  {
+    "name": "Дремора-кинвал",
+    "tier": "Ученик",
+    "cost": "400.0",
+    "level": "",
+    "health": "",
+    "stamina": "20.0",
+    "magicka": "400.0",
+    "damage": "2000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "500.0",
+      "frost": "200.0",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Даэдрот\nмили скелет вервольфа",
+    "tier": "Ученик",
+    "cost": "400.0",
+    "level": "35.34836118",
+    "health": "8.837090296",
+    "stamina": "20.0",
+    "magicka": "440.0",
+    "damage": "1000.0",
+    "armor": "-0.6084749861",
+    "resistances": {
+      "fire": "400.0",
+      "frost": "300.0",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "⇑Дух силь. пеп. прыгуна",
+    "tier": "Ученик",
+    "cost": "",
+    "level": "#NUM!",
+    "health": "#NUM!",
+    "stamina": "15.0",
+    "magicka": "200.0",
+    "damage": "1000.0",
+    "armor": "#NUM!",
+    "resistances": {
+      "fire": "10.0",
+      "frost": "40.0",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Дух сприггана (уник)",
+    "tier": "Адепт",
+    "cost": "400.0",
+    "level": "36.11494603",
+    "health": "9.028736509",
+    "stamina": "41.0",
+    "magicka": "300.0",
+    "damage": "10000.0",
+    "armor": "2.551487052",
+    "resistances": {
+      "fire": "400.0",
+      "frost": "300.0",
+      "shock": "400.0",
+      "chaos": "400.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Дух медведя",
+    "tier": "Адепт",
+    "cost": "800.0",
+    "level": "50.99299623",
+    "health": "6.374124528",
+    "stamina": "18.0",
+    "magicka": "800.0",
+    "damage": "10000.0",
+    "armor": "-3.758921737",
+    "resistances": {
+      "fire": "700.0",
+      "frost": "300.0",
+      "shock": "500.0",
+      "chaos": "400.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "⇑Дух сильного медведя",
+    "tier": "Адепт",
+    "cost": "#REF!",
+    "level": "",
+    "health": "#REF!",
+    "stamina": "23.0",
+    "magicka": "900.0",
+    "damage": "10000.0",
+    "armor": "#NUM!",
+    "resistances": {
+      "fire": "50.0",
+      "frost": "",
+      "shock": "40.0",
+      "chaos": "10.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Дух саблезуба",
+    "tier": "Адепт",
+    "cost": "400.0",
+    "level": "35.66543867",
+    "health": "8.916359668",
+    "stamina": "19.0",
+    "magicka": "315.0",
+    "damage": "10000.0",
+    "armor": "2.590070425",
+    "resistances": {
+      "fire": "300.0",
+      "frost": "200.0",
+      "shock": "400.0",
+      "chaos": "300.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "⇑Дух сильного саблезуба",
+    "tier": "Адепт",
+    "cost": "#REF!",
+    "level": "",
+    "health": "#REF!",
+    "stamina": "24.0",
+    "magicka": "750.0",
+    "damage": "10000.0",
+    "armor": "#NUM!",
+    "resistances": {
+      "fire": "30.0",
+      "frost": "",
+      "shock": "25.0",
+      "chaos": "5.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Дух коруса-охотника",
+    "tier": "Адепт",
+    "cost": "400.0",
+    "level": "35.41866391",
+    "health": "8.854665979",
+    "stamina": "25.0",
+    "magicka": "300.0",
+    "damage": "10000.0",
+    "armor": "2.480204932",
+    "resistances": {
+      "fire": "400.0",
+      "frost": "300.0",
+      "shock": "200.0",
+      "chaos": "200.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "⇑Дух силь. коруса-охот.",
+    "tier": "Адепт",
+    "cost": "#REF!",
+    "level": "",
+    "health": "#REF!",
+    "stamina": "29.0",
+    "magicka": "450.0",
+    "damage": "10000.0",
+    "armor": "#NUM!",
+    "resistances": {
+      "fire": "30.0",
+      "frost": "30.0",
+      "shock": "",
+      "chaos": "60.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Призрачный воин",
+    "tier": "Адепт",
+    "cost": "400.0",
+    "level": "35.72742639",
+    "health": "8.931856597",
+    "stamina": "30.0",
+    "magicka": "390.0",
+    "damage": "10000.0",
+    "armor": "-0.08877385238",
+    "resistances": {
+      "fire": "400.0",
+      "frost": "200.0",
+      "shock": "400.0",
+      "chaos": "200.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Призрачный лучник",
+    "tier": "Адепт",
+    "cost": "400.0",
+    "level": "35.15311999",
+    "health": "8.788279998",
+    "stamina": "27.0",
+    "magicka": "280.0",
+    "damage": "10000.0",
+    "armor": "2.756327676",
+    "resistances": {
+      "fire": "300.0",
+      "frost": "300.0",
+      "shock": "500.0",
+      "chaos": "300.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Призрачный маг",
+    "tier": "Адепт",
+    "cost": "400.0",
+    "level": "31.73012565",
+    "health": "7.932531412",
+    "stamina": "29.0",
+    "magicka": "260.0",
+    "damage": "10000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "300.0",
+      "frost": "400.0",
+      "shock": "400.0",
+      "chaos": "500.0"
+    },
+    "abilities": "20.0"
+  },
+  {
+    "name": "Голем плоти вырезать",
+    "tier": "Адепт",
+    "cost": "#REF!",
+    "level": "",
+    "health": "#REF!",
+    "stamina": "30.0",
+    "magicka": "350.0",
+    "damage": "10000.0",
+    "armor": "#NUM!",
+    "resistances": {
+      "fire": "",
+      "frost": "200.0",
+      "shock": "200.0",
+      "chaos": "200.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Дремора-кинрив [защитник]",
+    "tier": "Адепт",
+    "cost": "800.0",
+    "level": "",
+    "health": "",
+    "stamina": "30.0",
+    "magicka": "760.0",
+    "damage": "5000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "700.0",
+      "frost": "500.0",
+      "shock": "400.0",
+      "chaos": "500.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Дремора-кинрив [воин]",
+    "tier": "Адепт",
+    "cost": "400.0",
+    "level": "",
+    "health": "",
+    "stamina": "28.0",
+    "magicka": "460.0",
+    "damage": "3000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "500.0",
+      "frost": "400.0",
+      "shock": "300.0",
+      "chaos": "400.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Дремора-кинрив\n[маг]",
+    "tier": "Адепт",
+    "cost": "400.0",
+    "level": "",
+    "health": "",
+    "stamina": "29.0",
+    "magicka": "360.0",
+    "damage": "900.0",
+    "armor": "",
+    "resistances": {
+      "fire": "300.0",
+      "frost": "500.0",
+      "shock": "300.0",
+      "chaos": "400.0"
+    },
+    "abilities": "35.0"
+  },
+  {
+    "name": "Ледяной атронах",
+    "tier": "Адепт",
+    "cost": "800.0",
+    "level": "50.20608759",
+    "health": "6.275760948",
+    "stamina": "22.0",
+    "magicka": "800.0",
+    "damage": "10000.0",
+    "armor": "-4.25416371",
+    "resistances": {
+      "fire": "600.0",
+      "frost": "400.0",
+      "shock": "800.0",
+      "chaos": "600.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Огненный атронах",
+    "tier": "Адепт",
+    "cost": "400.0",
+    "level": "35.24060093",
+    "health": "8.810150233",
+    "stamina": "21.0",
+    "magicka": "300.0",
+    "damage": "10000.0",
+    "armor": "2.677141951",
+    "resistances": {
+      "fire": "300.0",
+      "frost": "500.0",
+      "shock": "100.0",
+      "chaos": "300.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "⇑Сильный огнен. атронах",
+    "tier": "Адепт",
+    "cost": "#REF!",
+    "level": "",
+    "health": "#REF!",
+    "stamina": "35.0",
+    "magicka": "700.0",
+    "damage": "10000.0",
+    "armor": "#NUM!",
+    "resistances": {
+      "fire": "20.0",
+      "frost": "65.0",
+      "shock": "",
+      "chaos": "30.0"
+    },
+    "abilities": "15.0"
+  },
+  {
+    "name": "⇑Сильный лед. атронах",
+    "tier": "Адепт",
+    "cost": "#REF!",
+    "level": "",
+    "health": "#REF!",
+    "stamina": "36.0",
+    "magicka": "800.0",
+    "damage": "10000.0",
+    "armor": "#NUM!",
+    "resistances": {
+      "fire": "60.0",
+      "frost": "",
+      "shock": "65.0",
+      "chaos": "30.0"
+    },
+    "abilities": "10.0"
+  },
+  {
+    "name": "Грозовой атронах",
+    "tier": "Адепт",
+    "cost": "400.0",
+    "level": "35.33984796",
+    "health": "8.83496199",
+    "stamina": "23.0",
+    "magicka": "300.0",
+    "damage": "10000.0",
+    "armor": "2.77638898",
+    "resistances": {
+      "fire": "300.0",
+      "frost": "300.0",
+      "shock": "300.0",
+      "chaos": "500.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "⇑Сильный гроз. атронах",
+    "tier": "Адепт",
+    "cost": "#REF!",
+    "level": "",
+    "health": "",
+    "stamina": "37.0",
+    "magicka": "700.0",
+    "damage": "10000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "40.0",
+      "frost": "",
+      "shock": "",
+      "chaos": "65.0"
+    },
+    "abilities": "10.0"
+  },
+  {
+    "name": "Дремора-страж",
+    "tier": "Адепт",
+    "cost": "#REF!",
+    "level": "",
+    "health": "",
+    "stamina": "35.0",
+    "magicka": "500.0",
+    "damage": "10000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "60.0",
+      "frost": "30.0",
+      "shock": "30.0",
+      "chaos": "30.0"
+    },
+    "abilities": "10.0"
+  },
+  {
+    "name": "Дремора-крушитель",
+    "tier": "Адепт",
+    "cost": "#REF!",
+    "level": "",
+    "health": "",
+    "stamina": "37.0",
+    "magicka": "450.0",
+    "damage": "10000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "50.0",
+      "frost": "20.0",
+      "shock": "20.0",
+      "chaos": "20.0"
+    },
+    "abilities": "10.0"
+  },
+  {
+    "name": "Дремора-лучник",
+    "tier": "Адепт",
+    "cost": "#REF!",
+    "level": "",
+    "health": "",
+    "stamina": "36.0",
+    "magicka": "400.0",
+    "damage": "10000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "40.0",
+      "frost": "20.0",
+      "shock": "20.0",
+      "chaos": "20.0"
+    },
+    "abilities": "10.0"
+  },
+  {
+    "name": "Дух тролля",
+    "tier": "Эксперт",
+    "cost": "1600.0",
+    "level": "65.67790772",
+    "health": "4.104869232",
+    "stamina": "32.0",
+    "magicka": "1000.0",
+    "damage": "10000.0",
+    "armor": "-3.396119714",
+    "resistances": {
+      "fire": "600.0",
+      "frost": "500.0",
+      "shock": "700.0",
+      "chaos": "600.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Дух лютоволка",
+    "tier": "Эксперт",
+    "cost": "800.0",
+    "level": "52.42501341",
+    "health": "6.553126677",
+    "stamina": "30.0",
+    "magicka": "500.0",
+    "damage": "10000.0",
+    "armor": "5.854401111",
+    "resistances": {
+      "fire": "400.0",
+      "frost": "200.0",
+      "shock": "600.0",
+      "chaos": "300.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Дух ледяного приведения",
+    "tier": "Эксперт",
+    "cost": "800.0",
+    "level": "50.72068744",
+    "health": "6.34008593",
+    "stamina": "30.0",
+    "magicka": "420.0",
+    "damage": "10000.0",
+    "armor": "5.854401111",
+    "resistances": {
+      "fire": "400.0",
+      "frost": "200.0",
+      "shock": "600.0",
+      "chaos": "400.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Дух огненного волка",
+    "tier": "Эксперт",
+    "cost": "800.0",
+    "level": "51.28897845",
+    "health": "6.411122306",
+    "stamina": "30.0",
+    "magicka": "420.0",
+    "damage": "10000.0",
+    "armor": "6.422692113",
+    "resistances": {
+      "fire": "400.0",
+      "frost": "600.0",
+      "shock": "200.0",
+      "chaos": "400.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Дух волка бури",
+    "tier": "Эксперт",
+    "cost": "800.0",
+    "level": "51.26549148",
+    "health": "6.408186435",
+    "stamina": "30.0",
+    "magicka": "420.0",
+    "damage": "10000.0",
+    "armor": "6.399205145",
+    "resistances": {
+      "fire": "400.0",
+      "frost": "400.0",
+      "shock": "400.0",
+      "chaos": "600.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "⇑Дух силь. огнен. волка",
+    "tier": "Эксперт",
+    "cost": "",
+    "level": "#NUM!",
+    "health": "#NUM!",
+    "stamina": "33.0",
+    "magicka": "550.0",
+    "damage": "10000.0",
+    "armor": "#NUM!",
+    "resistances": {
+      "fire": "15.0",
+      "frost": "60.0",
+      "shock": "",
+      "chaos": "30.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "⇑Дух сильного лед. прив.",
+    "tier": "Эксперт",
+    "cost": "",
+    "level": "#NUM!",
+    "health": "#NUM!",
+    "stamina": "33.0",
+    "magicka": "550.0",
+    "damage": "10000.0",
+    "armor": "#NUM!",
+    "resistances": {
+      "fire": "15.0",
+      "frost": "",
+      "shock": "60.0",
+      "chaos": "30.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "⇑Дух сильного волка бури",
+    "tier": "Эксперт",
+    "cost": "",
+    "level": "#NUM!",
+    "health": "#NUM!",
+    "stamina": "33.0",
+    "magicka": "550.0",
+    "damage": "10000.0",
+    "armor": "#NUM!",
+    "resistances": {
+      "fire": "15.0",
+      "frost": "30.0",
+      "shock": "",
+      "chaos": "60.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "⇑Дух сильного тролля",
+    "tier": "Эксперт",
+    "cost": "",
+    "level": "#NUM!",
+    "health": "#NUM!",
+    "stamina": "30.0",
+    "magicka": "1000.0",
+    "damage": "10000.0",
+    "armor": "#NUM!",
+    "resistances": {
+      "fire": "30.0",
+      "frost": "",
+      "shock": "40.0",
+      "chaos": "20.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Костяной воин",
+    "tier": "Эксперт",
+    "cost": "800.0",
+    "level": "51.63522285",
+    "health": "6.454402856",
+    "stamina": "39.0",
+    "magicka": "600.0",
+    "damage": "10000.0",
+    "armor": "2.52668207",
+    "resistances": {
+      "fire": "500.0",
+      "frost": "300.0",
+      "shock": "400.0",
+      "chaos": "400.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Костяной лучник",
+    "tier": "Эксперт",
+    "cost": "800.0",
+    "level": "51.17095472",
+    "health": "6.396369341",
+    "stamina": "37.0",
+    "magicka": "450.0",
+    "damage": "10000.0",
+    "armor": "5.580791135",
+    "resistances": {
+      "fire": "400.0",
+      "frost": "300.0",
+      "shock": "400.0",
+      "chaos": "400.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Костяной маг (3 по стихиям)",
+    "tier": "Эксперт",
+    "cost": "800.0",
+    "level": "51.11466121",
+    "health": "6.389332652",
+    "stamina": "38.0",
+    "magicka": "410.0",
+    "damage": "10000.0",
+    "armor": "6.501207807",
+    "resistances": {
+      "fire": "300.0",
+      "frost": "400.0",
+      "shock": "500.0",
+      "chaos": "500.0"
+    },
+    "abilities": "10.0"
+  },
+  {
+    "name": "Дремора-кинмаршер [Защитник]",
+    "tier": "Эксперт",
+    "cost": "1600.0",
+    "level": "65.66929193",
+    "health": "4.104330746",
+    "stamina": "42.0",
+    "magicka": "900.0",
+    "damage": "10000.0",
+    "armor": "3.034046547",
+    "resistances": {
+      "fire": "700.0",
+      "frost": "700.0",
+      "shock": "600.0",
+      "chaos": "600.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Дремора-кинмаршер [Воин]",
+    "tier": "Эксперт",
+    "cost": "800.0",
+    "level": "56.65771385",
+    "health": "7.082214231",
+    "stamina": "38.0",
+    "magicka": "660.0",
+    "damage": "10000.0",
+    "armor": "5.674173075",
+    "resistances": {
+      "fire": "600.0",
+      "frost": "600.0",
+      "shock": "400.0",
+      "chaos": "500.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Дремора-кинмаршер\n[Маг]",
+    "tier": "Эксперт",
+    "cost": "800.0",
+    "level": "51.24290768",
+    "health": "6.40536346",
+    "stamina": "37.0",
+    "magicka": "460.0",
+    "damage": "5000.0",
+    "armor": "5.422140115",
+    "resistances": {
+      "fire": "300.0",
+      "frost": "600.0",
+      "shock": "500.0",
+      "chaos": "500.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Дремора-кинмаршер [Лучник]",
+    "tier": "Эксперт",
+    "cost": "800.0",
+    "level": "51.04045941",
+    "health": "6.380057426",
+    "stamina": "36.0",
+    "magicka": "420.0",
+    "damage": "10000.0",
+    "armor": "5.674173075",
+    "resistances": {
+      "fire": "500.0",
+      "frost": "500.0",
+      "shock": "400.0",
+      "chaos": "400.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Даэдра-вдова",
+    "tier": "Эксперт",
+    "cost": "1600.0",
+    "level": "",
+    "health": "",
+    "stamina": "39.0",
+    "magicka": "1100.0",
+    "damage": "2000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "500.0",
+      "frost": "700.0",
+      "shock": "400.0",
+      "chaos": "600.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Бес пламени",
+    "tier": "Эксперт",
+    "cost": "800.0",
+    "level": "49.77651718",
+    "health": "6.222064648",
+    "stamina": "35.0",
+    "magicka": "400.0",
+    "damage": "1000.0",
+    "armor": "5.422140115",
+    "resistances": {
+      "fire": "300.0",
+      "frost": "600.0",
+      "shock": "400.0",
+      "chaos": "500.0"
+    },
+    "abilities": "50.0"
+  },
+  {
+    "name": "Бес молний",
+    "tier": "Эксперт",
+    "cost": "800.0",
+    "level": "49.77651718",
+    "health": "6.222064648",
+    "stamina": "35.0",
+    "magicka": "400.0",
+    "damage": "1000.0",
+    "armor": "5.422140115",
+    "resistances": {
+      "fire": "300.0",
+      "frost": "500.0",
+      "shock": "400.0",
+      "chaos": "600.0"
+    },
+    "abilities": "50.0"
+  },
+  {
+    "name": "Дух вервольфа",
+    "tier": "Мастер",
+    "cost": "3200.0",
+    "level": "81.27922117",
+    "health": "2.539975662",
+    "stamina": "39.0",
+    "magicka": "2000.0",
+    "damage": "10000.0",
+    "armor": "-6.339888051",
+    "resistances": {
+      "fire": "1000.0",
+      "frost": "1000.0",
+      "shock": "1000.0",
+      "chaos": "1000.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Гончая Хирсина",
+    "tier": "Мастер",
+    "cost": "1600.0",
+    "level": "",
+    "health": "",
+    "stamina": "42.0",
+    "magicka": "900.0",
+    "damage": "10000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "600.0",
+      "frost": "600.0",
+      "shock": "600.0",
+      "chaos": "400.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Страж леса",
+    "tier": "Мастер",
+    "cost": "1600.0",
+    "level": "67.46810832",
+    "health": "4.21675677",
+    "stamina": "41.0",
+    "magicka": "1000.0",
+    "damage": "10000.0",
+    "armor": "3.394080889",
+    "resistances": {
+      "fire": "600.0",
+      "frost": "600.0",
+      "shock": "600.0",
+      "chaos": "600.0"
+    },
+    "abilities": ""
+  },
+  {
+    "name": "Дух матери дымок",
+    "tier": "Мастер",
+    "cost": "1600.0",
+    "level": "66.83982085",
+    "health": "4.177488803",
+    "stamina": "40.0",
+    "magicka": "1000.0",
+    "damage": "10000.0",
+    "armor": "2.765793417",
+    "resistances": {
+      "fire": "500.0",
+      "frost": "600.0",
+      "shock": "800.0",
+      "chaos": "700.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "⇑Дух сильного вервольфа",
+    "tier": "Мастер",
+    "cost": "",
+    "level": "#NUM!",
+    "health": "#NUM!",
+    "stamina": "44.0",
+    "magicka": "1200.0",
+    "damage": "10000.0",
+    "armor": "#NUM!",
+    "resistances": {
+      "fire": "30.0",
+      "frost": "",
+      "shock": "40.0",
+      "chaos": "20.0"
+    },
+    "abilities": "5.0"
+  },
+  {
+    "name": "⇑Дух сильного спригана",
+    "tier": "Мастер",
+    "cost": "",
+    "level": "#NUM!",
+    "health": "#NUM!",
+    "stamina": "46.0",
+    "magicka": "1400.0",
+    "damage": "10000.0",
+    "armor": "#NUM!",
+    "resistances": {
+      "fire": "40.0",
+      "frost": "30.0",
+      "shock": "20.0",
+      "chaos": "20.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "⇑Дух сильн. матери-дымок",
+    "tier": "Мастер",
+    "cost": "",
+    "level": "#NUM!",
+    "health": "#NUM!",
+    "stamina": "45.0",
+    "magicka": "1100.0",
+    "damage": "10000.0",
+    "armor": "#NUM!",
+    "resistances": {
+      "fire": "20.0",
+      "frost": "20.0",
+      "shock": "30.0",
+      "chaos": "50.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Непогасший [защитник]",
+    "tier": "Мастер",
+    "cost": "3200.0",
+    "level": "81.25339416",
+    "health": "2.539168568",
+    "stamina": "47.0",
+    "magicka": "2800.0",
+    "damage": "10000.0",
+    "armor": "-5.896001516",
+    "resistances": {
+      "fire": "1100.0",
+      "frost": "1100.0",
+      "shock": "1100.0",
+      "chaos": "1100.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Непогасший [воин]",
+    "tier": "Мастер",
+    "cost": "1600.0",
+    "level": "66.91933266",
+    "health": "4.182458291",
+    "stamina": "41.0",
+    "magicka": "900.0",
+    "damage": "10000.0",
+    "armor": "3.450753944",
+    "resistances": {
+      "fire": "700.0",
+      "frost": "600.0",
+      "shock": "600.0",
+      "chaos": "600.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Непогасший [лучник]",
+    "tier": "Мастер",
+    "cost": "1600.0",
+    "level": "66.78573308",
+    "health": "4.174108318",
+    "stamina": "42.0",
+    "magicka": "900.0",
+    "damage": "10000.0",
+    "armor": "3.317154365",
+    "resistances": {
+      "fire": "600.0",
+      "frost": "700.0",
+      "shock": "700.0",
+      "chaos": "700.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Драконий жрец хаоса",
+    "tier": "Мастер",
+    "cost": "1600.0",
+    "level": "",
+    "health": "",
+    "stamina": "50.0",
+    "magicka": "900.0",
+    "damage": "10000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "500.0",
+      "frost": "750.0",
+      "shock": "750.0",
+      "chaos": "750.0"
+    },
+    "abilities": "50.0"
+  },
+  {
+    "name": "Драконий жрец молнии",
+    "tier": "Мастер",
+    "cost": "1600.0",
+    "level": "",
+    "health": "",
+    "stamina": "50.0",
+    "magicka": "900.0",
+    "damage": "10000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "500.0",
+      "frost": "750.0",
+      "shock": "750.0",
+      "chaos": "950.0"
+    },
+    "abilities": "50.0"
+  },
+  {
+    "name": "Драконий жрец огня",
+    "tier": "Мастер",
+    "cost": "1600.0",
+    "level": "",
+    "health": "",
+    "stamina": "50.0",
+    "magicka": "900.0",
+    "damage": "10000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "500.0",
+      "frost": "1000.0",
+      "shock": "600.0",
+      "chaos": "800.0"
+    },
+    "abilities": "50.0"
+  },
+  {
+    "name": "Драконий жрец холода",
+    "tier": "Мастер",
+    "cost": "1600.0",
+    "level": "63.46857872",
+    "health": "3.96678617",
+    "stamina": "50.0",
+    "magicka": "900.0",
+    "damage": "10000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "500.0",
+      "frost": "600.0",
+      "shock": "1000.0",
+      "chaos": "800.0"
+    },
+    "abilities": "50.0"
+  },
+  {
+    "name": "Голем плоти (ап от перков)",
+    "tier": "Мастер",
+    "cost": "3200.0",
+    "level": "71.84876655",
+    "health": "2.245273955",
+    "stamina": "10.0",
+    "magicka": "2400",
+    "damage": "10000.0",
+    "armor": "-1.849937818",
+    "resistances": {
+      "fire": "",
+      "frost": "",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Великий голем плоти",
+    "tier": "Мастер",
+    "cost": "800.0",
+    "level": "#NUM!",
+    "health": "#NUM!",
+    "stamina": "60.0",
+    "magicka": "700.0",
+    "damage": "10000.0",
+    "armor": "#NUM!",
+    "resistances": {
+      "fire": "",
+      "frost": "300.0",
+      "shock": "300.0",
+      "chaos": "300.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Дремора-маркиназ [защитник]",
+    "tier": "Мастер",
+    "cost": "3200.0",
+    "level": "",
+    "health": "",
+    "stamina": "50.0",
+    "magicka": "2600.0",
+    "damage": "10000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "1200.0",
+      "frost": "1200.0",
+      "shock": "1000.0",
+      "chaos": "1100.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Дремора-маркиназ [воин]",
+    "tier": "Мастер",
+    "cost": "1600.0",
+    "level": "",
+    "health": "",
+    "stamina": "48.0",
+    "magicka": "1200.0",
+    "damage": "10000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "900.0",
+      "frost": "900.0",
+      "shock": "700.0",
+      "chaos": "800.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Дремора-маркиназ\n[маг]",
+    "tier": "Мастер",
+    "cost": "1600.0",
+    "level": "",
+    "health": "",
+    "stamina": "49.0",
+    "magicka": "1000.0",
+    "damage": "7500.0",
+    "armor": "",
+    "resistances": {
+      "fire": "700.0",
+      "frost": "1000.0",
+      "shock": "700.0",
+      "chaos": "900.0"
+    },
+    "abilities": "100.0"
+  },
+  {
+    "name": "Хранитель Бездны",
+    "tier": "Мастер",
+    "cost": "3200.0",
+    "level": "86.20244256",
+    "health": "2.69382633",
+    "stamina": "50.0",
+    "magicka": "2000.0",
+    "damage": "10000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "900.0",
+      "frost": "1100.0",
+      "shock": "1100.0",
+      "chaos": "1100.0"
+    },
+    "abilities": "100.0"
+  },
+  {
+    "name": "Смотритель Знаний",
+    "tier": "Мастер",
+    "cost": "1600.0",
+    "level": "55.0493647",
+    "health": "3.440585294",
+    "stamina": "41.0",
+    "magicka": "700.0",
+    "damage": "10000.0",
+    "armor": "-6.532408291",
+    "resistances": {
+      "fire": "600.0",
+      "frost": "600.0",
+      "shock": "1200.0",
+      "chaos": "800.0"
+    },
+    "abilities": "100.0"
+  },
+  {
+    "name": "Смотритель Безумия",
+    "tier": "Мастер",
+    "cost": "1600.0",
+    "level": "65.93126038",
+    "health": "4.120703774",
+    "stamina": "40.0",
+    "magicka": "700.0",
+    "damage": "10000.0",
+    "armor": "4.349487391",
+    "resistances": {
+      "fire": "600.0",
+      "frost": "1200.0",
+      "shock": "600.0",
+      "chaos": "800.0"
+    },
+    "abilities": "100.0"
+  },
+  {
+    "name": "⇑Сильный огнен. трэлл",
+    "tier": "Мастер",
+    "cost": "#REF!",
+    "level": "#NUM!",
+    "health": "#NUM!",
+    "stamina": "45.0",
+    "magicka": "1100.0",
+    "damage": "10000.0",
+    "armor": "#NUM!",
+    "resistances": {
+      "fire": "45.0",
+      "frost": "75.0",
+      "shock": "",
+      "chaos": "50.0"
+    },
+    "abilities": "15.0"
+  },
+  {
+    "name": "⇑Сильный лед. трелл",
+    "tier": "Мастер",
+    "cost": "#REF!",
+    "level": "#NUM!",
+    "health": "#NUM!",
+    "stamina": "46.0",
+    "magicka": "1500.0",
+    "damage": "10000.0",
+    "armor": "#NUM!",
+    "resistances": {
+      "fire": "75.0",
+      "frost": "",
+      "shock": "75.0",
+      "chaos": "50.0"
+    },
+    "abilities": "10.0"
+  },
+  {
+    "name": "Страж Неведомого",
+    "tier": "Мастер",
+    "cost": "1600.0",
+    "level": "65.76858954",
+    "health": "4.110536846",
+    "stamina": "42.0",
+    "magicka": "700.0",
+    "damage": "10000.0",
+    "armor": "4.186816556",
+    "resistances": {
+      "fire": "600.0",
+      "frost": "700.0",
+      "shock": "700.0",
+      "chaos": "1200.0"
+    },
+    "abilities": "100.0"
+  },
+  {
+    "name": "⇑Сильный гроз. трэлл",
+    "tier": "Мастер",
+    "cost": "#REF!",
+    "level": "",
+    "health": "",
+    "stamina": "47.0",
+    "magicka": "1200.0",
+    "damage": "10050.0",
+    "armor": "",
+    "resistances": {
+      "fire": "60.0",
+      "frost": "",
+      "shock": "",
+      "chaos": "75.0"
+    },
+    "abilities": "15.0"
+  },
+  {
+    "name": "Дух волка (Хирсин)",
+    "tier": "Мастер",
+    "cost": "",
+    "level": "",
+    "health": "",
+    "stamina": "",
+    "magicka": "",
+    "damage": "",
+    "armor": "",
+    "resistances": {
+      "fire": "",
+      "frost": "",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": ""
+  },
+  {
+    "name": "по умолчанию",
+    "tier": "Мастер",
+    "cost": "-",
+    "level": "",
+    "health": "",
+    "stamina": "10.0",
+    "magicka": "150.0",
+    "damage": "10000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "100.0",
+      "frost": "100.0",
+      "shock": "100.0",
+      "chaos": "100.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "после 5 подношений",
+    "tier": "Мастер",
+    "cost": "-",
+    "level": "",
+    "health": "",
+    "stamina": "20.0",
+    "magicka": "300.0",
+    "damage": "10000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "200.0",
+      "frost": "200.0",
+      "shock": "200.0",
+      "chaos": "200.0"
+    },
+    "abilities": "-"
+  },
+  {
+    "name": "Горгулья",
+    "tier": "Мастер",
+    "cost": "300.0",
+    "level": "",
+    "health": "",
+    "stamina": "50.0",
+    "magicka": "1300.0",
+    "damage": "10000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "80.0",
+      "frost": "30.0",
+      "shock": "70.0",
+      "chaos": "50.0"
+    },
+    "abilities": ""
+  },
+  {
+    "name": "Гончая смерти",
+    "tier": "Мастер",
+    "cost": "200.0",
+    "level": "",
+    "health": "",
+    "stamina": "35.0",
+    "magicka": "400.0",
+    "damage": "10000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "50.0",
+      "frost": "20.0",
+      "shock": "60.0",
+      "chaos": "40.0"
+    },
+    "abilities": ""
+  },
+  {
+    "name": "Дремора (Роза сангвина)",
+    "tier": "Мастер",
+    "cost": "",
+    "level": "",
+    "health": "",
+    "stamina": "",
+    "magicka": "",
+    "damage": "",
+    "armor": "",
+    "resistances": {
+      "fire": "",
+      "frost": "",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": ""
+  },
+  {
+    "name": "по умолчанию",
+    "tier": "Мастер",
+    "cost": "",
+    "level": "",
+    "health": "",
+    "stamina": "10.0",
+    "magicka": "150.0",
+    "damage": "10000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "30.0",
+      "frost": "30.0",
+      "shock": "30.0",
+      "chaos": "30.0"
+    },
+    "abilities": ""
+  },
+  {
+    "name": "после 5 подношений",
+    "tier": "Мастер",
+    "cost": "",
+    "level": "",
+    "health": "",
+    "stamina": "20.0",
+    "magicka": "300.0",
+    "damage": "10000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "60.0",
+      "frost": "60.0",
+      "shock": "60.0",
+      "chaos": "60.0"
+    },
+    "abilities": ""
+  },
+  {
+    "name": "Луркер(Шпала из книжки)",
+    "tier": "Мастер",
+    "cost": "",
+    "level": "",
+    "health": "",
+    "stamina": "",
+    "magicka": "",
+    "damage": "",
+    "armor": "",
+    "resistances": {
+      "fire": "",
+      "frost": "",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": ""
+  },
+  {
+    "name": "Искатель(волосатый из книги)",
+    "tier": "Мастер",
+    "cost": "850.0",
+    "level": "",
+    "health": "",
+    "stamina": "",
+    "magicka": "900.0",
+    "damage": "10000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "",
+      "frost": "",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": ""
+  },
+  {
+    "name": "Смотритель(из каирна большой)",
+    "tier": "Мастер",
+    "cost": "",
+    "level": "",
+    "health": "",
+    "stamina": "",
+    "magicka": "",
+    "damage": "",
+    "armor": "",
+    "resistances": {
+      "fire": "",
+      "frost": "",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": ""
+  },
+  {
+    "name": "Вызов искателяDB",
+    "tier": "Мастер",
+    "cost": "",
+    "level": "",
+    "health": "",
+    "stamina": "",
+    "magicka": "",
+    "damage": "",
+    "armor": "",
+    "resistances": {
+      "fire": "",
+      "frost": "",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": ""
+  },
+  {
+    "name": "Невидимый ловчий",
+    "tier": "Мастер",
+    "cost": "",
+    "level": "",
+    "health": "",
+    "stamina": "",
+    "magicka": "",
+    "damage": "",
+    "armor": "",
+    "resistances": {
+      "fire": "",
+      "frost": "",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": ""
+  },
+  {
+    "name": "Призыв Тени Арнела",
+    "tier": "Мастер",
+    "cost": "",
+    "level": "",
+    "health": "",
+    "stamina": "",
+    "magicka": "",
+    "damage": "",
+    "armor": "",
+    "resistances": {
+      "fire": "",
+      "frost": "",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": ""
+  },
+  {
+    "name": "Дух коня",
+    "tier": "Мастер",
+    "cost": "",
+    "level": "",
+    "health": "",
+    "stamina": "",
+    "magicka": "250.0",
+    "damage": "20900.0",
+    "armor": "",
+    "resistances": {
+      "fire": "",
+      "frost": "",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": ""
+  },
+  {
+    "name": "Вызов порождения пеплаDB",
+    "tier": "Мастер",
+    "cost": "",
+    "level": "",
+    "health": "",
+    "stamina": "",
+    "magicka": "",
+    "damage": "",
+    "armor": "",
+    "resistances": {
+      "fire": "",
+      "frost": "",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": ""
+  },
+  {
+    "name": "Вызов пепельного стражаDB",
+    "tier": "Мастер",
+    "cost": "",
+    "level": "",
+    "health": "",
+    "stamina": "",
+    "magicka": "",
+    "damage": "",
+    "armor": "",
+    "resistances": {
+      "fire": "",
+      "frost": "",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": ""
+  },
+  {
+    "name": "⇑Дремора-Кинвал-Воин",
+    "tier": "Мастер",
+    "cost": "1100.0",
+    "level": "",
+    "health": "",
+    "stamina": "",
+    "magicka": "1300.0",
+    "damage": "10000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "",
+      "frost": "",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": ""
+  },
+  {
+    "name": "⇑Дремора-Кинвал-Лучник",
+    "tier": "Мастер",
+    "cost": "1000.0",
+    "level": "",
+    "health": "",
+    "stamina": "",
+    "magicka": "1150.0",
+    "damage": "10000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "",
+      "frost": "",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": ""
+  },
+  {
+    "name": "⇑Дремора-Кинвал-Архимаг",
+    "tier": "Мастер",
+    "cost": "1050.0",
+    "level": "",
+    "health": "",
+    "stamina": "",
+    "magicka": "1000.0",
+    "damage": "10000.0",
+    "armor": "",
+    "resistances": {
+      "fire": "",
+      "frost": "",
+      "shock": "",
+      "chaos": ""
+    },
+    "abilities": ""
+  }
+]

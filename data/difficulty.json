@@ -1,0 +1,144 @@
+{
+  "modes": [
+    {
+      "id": "adventure",
+      "name": "Приключение",
+      "badge": "assets/img/image34.jpg",
+      "description": "Сбалансированный режим для спокойного изучения мира"
+    },
+    {
+      "id": "tactics",
+      "name": "Тактика",
+      "badge": "assets/img/image33.jpg",
+      "description": "Повышенные требования к позиционированию и ресурсам"
+    },
+    {
+      "id": "heroic",
+      "name": "Героический",
+      "badge": "assets/img/image36.jpg",
+      "description": "Серьезный вызов для опытных игроков"
+    },
+    {
+      "id": "gods",
+      "name": "Испытание богов",
+      "badge": "assets/img/image35.jpg",
+      "description": "Максимальный бескомпромиссный хардкор"
+    }
+  ],
+  "multipliers": [
+    {
+      "param": "Наносимый игроком урон",
+      "adventure": "2.0x",
+      "tactics": "1.5x",
+      "heroic": "1.2x",
+      "gods": "1.0x"
+    },
+    {
+      "param": "Получаемый игроком урон",
+      "adventure": "0.25x",
+      "tactics": "0.5x",
+      "heroic": "0.8x",
+      "gods": "1.0x"
+    },
+    {
+      "param": "Получаемый опыт",
+      "adventure": "3.0x",
+      "tactics": "2.0x",
+      "heroic": "1.5x",
+      "gods": "1.0x"
+    },
+    {
+      "param": "Скорость атак противников",
+      "adventure": "-20%",
+      "tactics": "-15%",
+      "heroic": "-10%",
+      "gods": "0%"
+    },
+    {
+      "param": "Скорость полета снарядов противников",
+      "adventure": "-20%",
+      "tactics": "-10%",
+      "heroic": "0%",
+      "gods": "0%"
+    },
+    {
+      "param": "Скорость разворота противников",
+      "adventure": "-50%",
+      "tactics": "-25%",
+      "heroic": "0%",
+      "gods": "0%"
+    },
+    {
+      "param": "Регенерация здоровья противников",
+      "adventure": "-75%",
+      "tactics": "-50%",
+      "heroic": "-25%",
+      "gods": "0%"
+    },
+    {
+      "param": "Длительность оглушения противников",
+      "adventure": "+100%",
+      "tactics": "+50%",
+      "heroic": "+25%",
+      "gods": "0%"
+    },
+    {
+      "param": "Цены уроков, навыков и подношений",
+      "adventure": "-50%",
+      "tactics": "-25%",
+      "heroic": "0%",
+      "gods": "0%"
+    }
+  ],
+  "rules": [
+    {
+      "rule": "Запрет смены камня-хранителя (кроме дерева)",
+      "adventure": false,
+      "tactics": false,
+      "heroic": false,
+      "gods": true
+    },
+    {
+      "rule": "Запрет быстрых перемещений",
+      "adventure": false,
+      "tactics": false,
+      "heroic": false,
+      "gods": true
+    },
+    {
+      "rule": "Ограничение на покупку очков навыков",
+      "adventure": false,
+      "tactics": false,
+      "heroic": false,
+      "gods": true
+    },
+    {
+      "rule": "Увеличенный урон от падений",
+      "adventure": false,
+      "tactics": false,
+      "heroic": false,
+      "gods": true
+    },
+    {
+      "rule": "Запрет сохранений в бою",
+      "adventure": false,
+      "tactics": false,
+      "heroic": true,
+      "gods": true
+    },
+    {
+      "rule": "Запрет боя на лошади",
+      "adventure": false,
+      "tactics": true,
+      "heroic": true,
+      "gods": true
+    },
+    {
+      "rule": "Драугры бесплотны при пробуждении",
+      "adventure": false,
+      "tactics": true,
+      "heroic": true,
+      "gods": true
+    }
+  ]
+}

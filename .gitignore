@@ -2,6 +2,13 @@
 # Git Ignore for Skyrim True Believer (STB) Web Wiki
 # ==============================================================================
 
+# Source raw spreadsheets
+Skyrim True Believer.xlsx
+*.xlsx
+*.xls
+~$*.xlsx
+~$*.xls
+
 # OS generated files
 .DS_Store
 .DS_Store?
@@ -52,10 +59,3 @@ wheels/
 *.tmp
 *.temp
 *.bak
-
-# Excel temporary lock files (opened in MS Excel)
-~$*.xlsx
-~$*.xls
-
-# Optional: Uncomment the line below if you do NOT want to push the 21MB source Excel file to GitHub:
-# *.xlsx

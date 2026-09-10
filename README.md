@@ -46,50 +46,6 @@
 
 ---
 
-## 🚀 Пошаговая инструкция: Публикация на GitHub Pages
-
-### Шаг 1: Создайте репозиторий на GitHub
-1. Перейдите на [github.com/new](https://github.com/new).
-2. Укажите название репозитория (например, `stb-wiki` или `skyrim-true-believer`).
-3. Сделайте его **Public** (Публичным) и нажмите **Create repository**.
-
-### Шаг 2: Загрузите файлы через терминал
-Откройте PowerShell / терминал в папке проекта и выполните:
-
-```bash
-# Инициализация git
-git init
-
-# Добавление всех файлов (учитывая .gitignore)
-git add .
-
-# Создание первого коммита
-git commit -m "feat: initial STB 3.0 web wiki release"
-
-# Переименование главной ветки в main
-git branch -M main
-
-# Привязка к вашему репозиторию на GitHub (замените на свою ссылку)
-git remote add origin https://github.com/<ВАШ_АККАУНТ>/<ИМЯ_РЕПОЗИТОРИЯ>.git
-
-# Отправка файлов на GitHub
-git push -u origin main
-```
-
-### Шаг 3: Включите GitHub Pages
-1. Откройте ваш репозиторий на GitHub.
-2. Перейдите во вкладку **Settings** (Настройки) ➔ слева выберите раздел **Pages**.
-3. В блоке **Build and deployment**:
-   - **Source**: выберите `Deploy from a branch`.
-   - **Branch**: выберите `main` и папку `/(root)`.
-   - Нажмите **Save**.
-4. Через 30–60 секунд в верхней части страницы появится зеленая плашка со ссылкой на ваш сайт:
-   ```
-   https://<ВАШ_АККАУНТ>.github.io/<ИМЯ_РЕПОЗИТОРИЯ>/
-   ```
-
----
-
 ## 📁 Структура проекта
 
 ```text
@@ -97,7 +53,7 @@ STB/
 ├── .gitignore              # Исключения для Git (кэш, временные файлы, IDE)
 ├── .nojekyll               # Файл отключения Jekyll на GitHub Pages
 ├── index.html              # Главная веб-страница приложения
-├── README.md               # Документация и руководство по запуску
+├── README.md               # Документация и описание возможностей
 ├── assets/
 │   ├── css/
 │   │   └── style.css       # Стили в темной стилистике Skyrim RPG
@@ -128,9 +84,9 @@ STB/
 
 ---
 
-## 🔄 Как обновлять данные при изменении Excel файла
+## 🔄 Как обновлять данные при изменении базы
 
-Если вы обновите исходный файл таблицы `Skyrim True Believer.xlsx`, вы можете в одну команду перегенерировать все базы данных:
+Если вы обновите исходную базу, вы можете в одну команду перегенерировать все JSON файлы:
 
 ```bash
 python scripts/export_all_data.py
@@ -140,10 +96,10 @@ python scripts/export_all_data.py
 
 ```bash
 git add data/
-git commit -m "update: refresh game data from spreadsheet"
+git commit -m "update: refresh game data"
 git push
 ```
-GitHub Pages автоматически подхватит обновление за несколько секунд!
+GitHub Pages автоматически применит обновление за несколько секунд!
 
 ---
 

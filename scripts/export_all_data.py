@@ -360,6 +360,16 @@ def build_perks_from_shapes(shape_list):
         })
     return perks
 
+def parse_chk_lvl(req_str):
+    nums = re.findall(r'\d+', str(req_str))
+    return int(nums[0]) if nums else 0
+
+werewolf_perks_list = build_perks_from_shapes(werewolf_shapes)
+werewolf_perks_list.sort(key=lambda p: (parse_chk_lvl(p['req']), p['name']))
+
+vampire_perks_list = build_perks_from_shapes(vampire_shapes)
+vampire_perks_list.sort(key=lambda p: (parse_chk_lvl(p['req']), p['name']))
+
 cursed_data = {
     "werewolf": {
         "title": "Вервольф (Оборотень)",
@@ -369,7 +379,7 @@ cursed_data = {
             "Древо способностей работает в человеческой форме (без обязательного перехода в форму зверя)",
             "Смешение кровей: дает возможность стать Вампиром-гибридом"
         ],
-        "perks": build_perks_from_shapes(werewolf_shapes)
+        "perks": werewolf_perks_list
     },
     "vampire": {
         "title": "Вампир (Владыка ночи)",
@@ -380,7 +390,7 @@ cursed_data = {
             "Штрафы: Уязвимость к солнцу, сопротивление огню -200%, сопротивление холоду +100%",
             "Смешение кровей: дает возможность стать Вервольфом-гибридом"
         ],
-        "perks": build_perks_from_shapes(vampire_shapes)
+        "perks": vampire_perks_list
     }
 }
 with open(f"{DATA_DIR}/cursed.json", "w", encoding="utf-8") as f:
@@ -478,6 +488,13 @@ with zipfile.ZipFile(XLSX_PATH) as z:
                 "level": p_lvl,
                 "description": best_desc if best_desc else "Базовый перк ветки"
             })
+            
+        # Sort perks by required level ascending (1 -> 100)
+        def parse_min_lvl(lvl_str):
+            nums = re.findall(r'\d+', str(lvl_str))
+            return int(nums[0]) if nums else 0
+            
+        tree_perks.sort(key=lambda p: (parse_min_lvl(p['level']), p['name']))
             
         perks_data.append({
             "id": meta["id"],

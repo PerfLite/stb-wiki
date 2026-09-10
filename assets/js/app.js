@@ -829,7 +829,14 @@ const App = {
     const data = await this.fetchData('cursed.json');
     if (!data) return;
 
-    container.innerHTML = `
+      const parseChk = (r) => {
+        const m = String(r || '').match(/\d+/);
+        return m ? parseInt(m[0], 10) : 0;
+      };
+      const sortedWerewolf = [...data.werewolf.perks].sort((a, b) => parseChk(a.req) - parseChk(b.req) || a.name.localeCompare(b.name, 'ru'));
+      const sortedVampire = [...data.vampire.perks].sort((a, b) => parseChk(a.req) - parseChk(b.req) || a.name.localeCompare(b.name, 'ru'));
+
+      container.innerHTML = `
       <div class="section-header-box">
         <div class="section-header-left">
           <h2>🧛🐺 Проклятые (Вампиры и Вервольфы)</h2>
@@ -849,7 +856,7 @@ const App = {
         </ul>
       </div>
       <div class="perks-node-grid" style="margin-bottom: 40px;">
-        ${data.werewolf.perks.map(p => `
+        ${sortedWerewolf.map(p => `
           <div class="perk-card">
             <div class="perk-top">
               <span class="perk-name">${p.name}</span>
@@ -872,7 +879,7 @@ const App = {
         </ul>
       </div>
       <div class="perks-node-grid">
-        ${data.vampire.perks.map(p => `
+        ${sortedVampire.map(p => `
           <div class="perk-card" style="border-left: 3px solid var(--accent-red);">
             <div class="perk-top">
               <span class="perk-name" style="color: #ff9999;">${p.name}</span>
@@ -893,6 +900,33 @@ const App = {
     if (!data) return;
 
     let selectedTreeIndex = 0;
+    let sortMode = 'lvl-asc'; // 'lvl-asc', 'lvl-desc', 'name-asc'
+
+    const getMinLevel = (lvlStr) => {
+      const m = String(lvlStr || '').match(/\d+/);
+      return m ? parseInt(m[0], 10) : 0;
+    };
+
+    const getLevelBadgeStyle = (lvlStr) => {
+      const lvl = getMinLevel(lvlStr);
+      if (lvl <= 20) return 'background: rgba(152, 195, 121, 0.15); color: var(--accent-green);';
+      if (lvl <= 45) return 'background: rgba(97, 175, 239, 0.15); color: var(--accent-blue);';
+      if (lvl <= 65) return 'background: rgba(198, 120, 221, 0.15); color: var(--accent-purple);';
+      if (lvl <= 85) return 'background: rgba(229, 192, 123, 0.15); color: var(--accent-gold);';
+      return 'background: linear-gradient(135deg, rgba(255, 215, 0, 0.25), rgba(212, 175, 55, 0.15)); color: var(--accent-gold-bright); border: 1px solid var(--accent-gold);';
+    };
+
+    const sortPerks = (perks, mode) => {
+      const arr = [...perks];
+      if (mode === 'lvl-asc') {
+        arr.sort((a, b) => getMinLevel(a.level) - getMinLevel(b.level) || a.name.localeCompare(b.name, 'ru'));
+      } else if (mode === 'lvl-desc') {
+        arr.sort((a, b) => getMinLevel(b.level) - getMinLevel(a.level) || a.name.localeCompare(b.name, 'ru'));
+      } else if (mode === 'name-asc') {
+        arr.sort((a, b) => a.name.localeCompare(b.name, 'ru'));
+      }
+      return arr;
+    };
 
     const renderTree = (idx) => {
       selectedTreeIndex = idx;
@@ -905,19 +939,33 @@ const App = {
         else pill.classList.remove('active');
       });
 
+      const sortedPerks = sortPerks(tree.perks, sortMode);
+
       treeContent.innerHTML = `
-        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px;">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px;">
           <h3 style="font-family: var(--font-title); color: var(--accent-gold); font-size: 1.3rem;">
             ${tree.name} <span class="nav-badge" style="margin-left: 8px;">${tree.total_perks} перков</span>
           </h3>
-          <input type="text" id="treePerkSearch" class="filter-input" placeholder="Поиск в этой ветке...">
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+            <span style="font-size: 0.85rem; color: var(--text-muted);">Сортировка:</span>
+            <button class="header-btn sort-btn ${sortMode === 'lvl-asc' ? 'highlight' : ''}" onclick="App.changePerkSort('lvl-asc')">
+              Ур. 1 ➔ 100
+            </button>
+            <button class="header-btn sort-btn ${sortMode === 'lvl-desc' ? 'highlight' : ''}" onclick="App.changePerkSort('lvl-desc')">
+              Ур. 100 ➔ 1
+            </button>
+            <button class="header-btn sort-btn ${sortMode === 'name-asc' ? 'highlight' : ''}" onclick="App.changePerkSort('name-asc')">
+              А–Я
+            </button>
+            <input type="text" id="treePerkSearch" class="filter-input" placeholder="Поиск в этой ветке..." style="min-width: 180px;">
+          </div>
         </div>
         <div class="perks-node-grid" id="currentTreeGrid">
-          ${tree.perks.map(p => `
+          ${sortedPerks.map(p => `
             <div class="perk-card">
               <div class="perk-top">
                 <span class="perk-name">${p.name}</span>
-                <span class="perk-level-badge">Ур. ${p.level}</span>
+                <span class="perk-level-badge" style="${getLevelBadgeStyle(p.level)}">Ур. ${p.level}</span>
               </div>
               <div class="perk-desc">${p.description}</div>
             </div>
@@ -932,6 +980,11 @@ const App = {
           card.style.display = text.includes(q) ? 'block' : 'none';
         });
       });
+    };
+
+    this.changePerkSort = (newMode) => {
+      sortMode = newMode;
+      renderTree(selectedTreeIndex);
     };
 
     container.innerHTML = `

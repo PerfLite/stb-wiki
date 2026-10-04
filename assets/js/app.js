@@ -1,90 +1,420 @@
 /**
- * Skyrim True Believer 3.0 - Interactive Encyclopedia
+ * Skyrim True Believer 3.0 - Runic Map & Interactive Encyclopedia
  * Standalone Client-side App for GitHub Pages
  */
 
 const App = {
   dataCache: {},
   currentView: 'overview',
-  favorites: JSON.parse(localStorage.getItem('stb_favorites') || '[]'),
-  completedQuests: JSON.parse(localStorage.getItem('stb_quests') || '[]'),
   searchIndex: [],
 
-  async init() {
-    this.bindEvents();
-    await this.loadSearchIndex();
-    
-    // Initial route
-    const hash = window.location.hash.replace('#', '') || 'overview';
-    this.navigate(hash);
+  mapState: {
+    W: 3300,
+    H: 2300,
+    cx: 1650,
+    cy: 1150,
+    s: 1,
+    tx: 0,
+    ty: 0,
+    isles: [],
+    worldEl: null,
+    vpEl: null,
+    svgEl: null,
+    navEl: null
   },
 
-  bindEvents() {
-    // Hash change routing
-    window.addEventListener('hashchange', () => {
-      const hash = window.location.hash.replace('#', '') || 'overview';
-      this.navigate(hash);
+  async init() {
+    this.initMap();
+    this.bindEvents();
+    await this.loadSearchIndex();
+
+    // Check URL hash on initial load
+    const hash = window.location.hash.replace('#', '');
+    if (hash && hash !== 'overview') {
+      const target = this.mapState.isles.find(i => i.id === hash);
+      if (target) {
+        this.fly(target.x, target.y, 1.3);
+        setTimeout(() => this.openSection(hash), 400);
+      }
+    } else {
+      this.fit();
+    }
+  },
+
+  initMap() {
+    const W = 3300, H = 2300;
+    const cx = W / 2, cy = H / 2;
+    const world = document.getElementById('world');
+    const vp = document.getElementById('vp');
+    const svg = document.getElementById('links');
+    const nav = document.getElementById('nav');
+
+    this.mapState.worldEl = world;
+    this.mapState.vpEl = vp;
+    this.mapState.svgEl = svg;
+    this.mapState.navEl = nav;
+    this.mapState.cx = cx;
+    this.mapState.cy = cy;
+
+    const RN = 'ᚠᚢᚦᚨᚱᚲᚷᚹᚺᚾᛁᛃᛇᛈᛉ';
+    const S = [
+      ['База и механики', '20', 1, ['Основные механики сборки', 'Системы выживания', 'Правила и советы'], 'base'],
+      ['Расы и Камни', '19', 1, ['Расы с бонусами', 'Камни-покровители'], 'races_stones'],
+      ['Аэдра', '9', 2, ['Акатош', 'Мара', 'Талос', '<em>…и другие</em>'], 'aedra'],
+      ['Даэдра', '16', 2, ['Азура', 'Мерунес Дагон', 'Молаг Бал', '<em>…и другие</em>'], 'daedra'],
+      ['Проклятые', '2', 2, ['Вампиризм', 'Ликантропия'], 'cursed'],
+      ['Ветки способностей', '18', 3, ['Деревья перков', 'Пути развития'], 'perks'],
+      ['Чёрные книги', '7', 3, ['Награды и перки', 'Где найти'], 'black_books'],
+      ['Заклинания / Ту\'умы', '590+', 4, ['Школы магии', 'Крики', 'Фильтры'], 'spells_shouts'],
+      ['Призывы', '118', 4, ['Саммоны и их характеристики'], 'summons'],
+      ['Оружие и Броня', '80+', 5, ['Сеты', 'Уникальные свойства'], 'equipment'],
+      ['Уникальные предметы', '680+', 5, ['Каталог с поиском', 'Где получить'], 'uniques'],
+      ['Расходники / Алхимия', '100+', 5, ['Зелья', 'Ингредиенты'], 'consumables'],
+      ['Зачарования', '50+', 4, ['Эффекты', 'Комбинации'], 'enchantments'],
+      ['Сложность', '4', 1, ['Уровни сложности', 'Различия'], 'difficulty'],
+      ['Награды за квесты', '2150м', 3, ['Квесты и награды', 'Золото и предметы'], 'quest_rewards']
+    ];
+
+    const isles = [];
+    this.mapState.isles = isles;
+
+    const mk = (x, y, cls, col, html, name, secId) => {
+      const e = document.createElement('div');
+      e.className = 'isle ' + cls;
+      e.style.left = x + 'px';
+      e.style.top = y + 'px';
+      e.style.setProperty('--col', col);
+      e.dataset.sec = secId;
+      e.innerHTML = html;
+      e.dataset.t = name.toLowerCase() + ' ' + e.textContent.toLowerCase();
+      world.appendChild(e);
+      return e;
+    };
+
+    // Central Hub Island
+    const hub = mk(
+      cx, cy, 'hub', 'var(--gold)',
+      `<b class="rn">ᛟ</b>
+       <h2>STB 3.0</h2>
+       <i class="rule"></i>
+       <p>Skyrim True Believer. Вся вики на одной карте: приближайте раздел, чтобы исследовать содержимое.</p>
+       <div class="hub-btn-wrap">
+         <button class="isle-btn" data-sec="overview">ᛟ Обзор сборки ᛟ</button>
+       </div>`,
+      'главная', 'overview'
+    );
+    isles.push({ e: hub, x: cx, y: cy, n: 'Главная', id: 'overview', col: 'var(--gold)', rn: 'ᛟ', badge: '' });
+
+    // Hub nav button
+    const hubNavBtn = document.createElement('button');
+    hubNavBtn.innerHTML = '<span class="nav-rn">ᛟ</span> Главная';
+    hubNavBtn.onclick = () => { this.fly(cx, cy, 1.1); };
+    nav.appendChild(hubNavBtn);
+
+    // 15 Islands around the Hub
+    S.forEach((r, i) => {
+      const a = -Math.PI / 2 + (i * 2 * Math.PI) / S.length;
+      const x = cx + Math.cos(a) * 1300;
+      const y = cy + Math.sin(a) * 880;
+      const d = `<div class="d">
+                   <ul>${r[3].map(t => '<li>' + t + '</li>').join('')}</ul>
+                   <div class="isle-btn-wrap">
+                     <button class="isle-btn" data-sec="${r[4]}">ᛟ Исследовать раздел ᛟ</button>
+                   </div>
+                 </div>`;
+      const e = mk(
+        x, y, '', 'var(--c' + r[2] + ')',
+        `<b class="rn">${RN[i]}</b>
+         <h2>${r[0]}</h2>
+         <i class="rule"></i>
+         ${r[1] ? '<div class="n">' + r[1] + '</div>' : ''}
+         ${d}`,
+        r[0], r[4]
+      );
+      isles.push({ e: e, x: x, y: y, n: r[0], id: r[4], col: 'var(--c' + r[2] + ')', rn: RN[i], badge: r[1] });
+      svg.insertAdjacentHTML('beforeend', `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}"/>`);
+
+      const b = document.createElement('button');
+      b.innerHTML = `<span class="nav-rn">${RN[i]}</span> ${r[0]}`;
+      b.onclick = () => { this.fly(x, y, 1.3); };
+      nav.appendChild(b);
     });
 
-    // Mobile sidebar toggle
-    const menuBtn = document.getElementById('menuToggleBtn');
-    const sidebar = document.getElementById('sidebar');
-    if (menuBtn && sidebar) {
-      menuBtn.addEventListener('click', () => sidebar.classList.toggle('open'));
-    }
+    this.bindMapInteractions();
+  },
 
-    // Close sidebar on link click (mobile)
-    document.querySelectorAll('.nav-item').forEach(item => {
-      item.addEventListener('click', () => {
-        if (window.innerWidth <= 992) {
-          sidebar.classList.remove('open');
-        }
-      });
-    });
+  bindMapInteractions() {
+    const vp = this.mapState.vpEl;
+    const world = this.mapState.worldEl;
+    let P = {}, last = 0, startPos = {};
+    let isDragging = false;
 
-    // Search trigger
-    const searchTrigger = document.getElementById('searchTrigger');
-    const searchModal = document.getElementById('searchModal');
-    const searchClose = document.getElementById('searchClose');
-    const searchInput = document.getElementById('searchModalInput');
+    vp.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      this.zoomAt(e.clientX, e.clientY, Math.exp(-e.deltaY * 0.0015));
+    }, { passive: false });
 
-    if (searchTrigger && searchModal) {
-      searchTrigger.addEventListener('click', () => this.openSearchModal());
-      searchClose.addEventListener('click', () => this.closeSearchModal());
-      searchModal.addEventListener('click', (e) => {
-        if (e.target === searchModal) this.closeSearchModal();
-      });
-    }
-
-    // Keyboard shortcuts
-    window.addEventListener('keydown', (e) => {
-      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
-        e.preventDefault();
-        this.openSearchModal();
-      } else if (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
-        e.preventDefault();
-        this.openSearchModal();
-      } else if (e.key === 'Escape') {
-        this.closeSearchModal();
-        this.closeFavoritesModal();
+    vp.addEventListener('pointerdown', (e) => {
+      vp.setPointerCapture(e.pointerId);
+      P[e.pointerId] = [e.clientX, e.clientY];
+      startPos[e.pointerId] = [e.clientX, e.clientY];
+      vp.classList.add('drag');
+      world.classList.remove('fly');
+      const hint = document.getElementById('hint');
+      if (hint) hint.style.opacity = '0';
+      if (Object.keys(P).length === 2) {
+        const a = Object.values(P);
+        last = Math.hypot(a[0][0] - a[1][0], a[0][1] - a[1][1]);
       }
     });
 
-    if (searchInput) {
-      searchInput.addEventListener('input', (e) => this.handleSearchInput(e.target.value));
-    }
+    vp.addEventListener('pointermove', (e) => {
+      const p = P[e.pointerId];
+      if (!p) return;
+      const ids = Object.keys(P);
+      const start = startPos[e.pointerId];
+      if (start && Math.hypot(e.clientX - start[0], e.clientY - start[1]) > 5) {
+        isDragging = true;
+      }
+      if (ids.length === 1) {
+        this.mapState.tx += e.clientX - p[0];
+        this.mapState.ty += e.clientY - p[1];
+        P[e.pointerId] = [e.clientX, e.clientY];
+        this.applyTransform();
+      } else if (ids.length === 2) {
+        P[e.pointerId] = [e.clientX, e.clientY];
+        const a = Object.values(P);
+        const d = Math.hypot(a[0][0] - a[1][0], a[0][1] - a[1][1]);
+        if (last) this.zoomAt((a[0][0] + a[1][0]) / 2, (a[0][1] + a[1][1]) / 2, d / last);
+        last = d;
+      }
+    });
 
-    // Favorites trigger
-    const favBtn = document.getElementById('favTriggerBtn');
-    const favModal = document.getElementById('favoritesModal');
-    const favClose = document.getElementById('favoritesClose');
-    if (favBtn && favModal) {
-      favBtn.addEventListener('click', () => this.openFavoritesModal());
-      favClose.addEventListener('click', () => this.closeFavoritesModal());
-      favModal.addEventListener('click', (e) => {
-        if (e.target === favModal) this.closeFavoritesModal();
+    const up = (e) => {
+      delete P[e.pointerId];
+      delete startPos[e.pointerId];
+      last = 0;
+      if (!Object.keys(P).length) {
+        vp.classList.remove('drag');
+        setTimeout(() => { isDragging = false; }, 40);
+      }
+    };
+    vp.addEventListener('pointerup', up);
+    vp.addEventListener('pointercancel', up);
+
+    // Clicking island cards
+    world.addEventListener('click', (e) => {
+      if (isDragging) return;
+
+      const btn = e.target.closest('.isle-btn');
+      if (btn) {
+        const secId = btn.getAttribute('data-sec');
+        if (secId) this.openSection(secId);
+        return;
+      }
+
+      const isleEl = e.target.closest('.isle');
+      if (isleEl) {
+        const secId = isleEl.getAttribute('data-sec');
+        const item = this.mapState.isles.find(i => i.id === secId);
+        if (item) {
+          if (this.mapState.s < 0.75) {
+            this.fly(item.x, item.y, 1.3);
+          } else {
+            this.openSection(secId);
+          }
+        }
+      }
+    });
+
+    // Top control buttons
+    document.getElementById('home')?.addEventListener('click', () => {
+      world.classList.add('fly');
+      this.fit();
+      setTimeout(() => { world.classList.remove('fly'); }, 850);
+    });
+
+    document.getElementById('zoomIn')?.addEventListener('click', () => {
+      this.zoomAt(vp.clientWidth / 2, vp.clientHeight / 2, 1.35);
+    });
+
+    document.getElementById('zoomOut')?.addEventListener('click', () => {
+      this.zoomAt(vp.clientWidth / 2, vp.clientHeight / 2, 1 / 1.35);
+    });
+
+    // Top Search #q
+    const qInput = document.getElementById('q');
+    if (qInput) {
+      qInput.addEventListener('input', (e) => {
+        const v = e.target.value.trim().toLowerCase();
+        let first = null;
+        this.mapState.isles.forEach((o) => {
+          const m = !v || o.e.dataset.t.indexOf(v) > -1;
+          o.e.classList.toggle('dim', !m);
+          o.e.classList.toggle('hit', !!v && m);
+          if (v && m && !first) first = o;
+        });
+        if (first) this.fly(first.x, first.y, 1.3);
+        this.handleSearchDropdown(v);
+      });
+
+      qInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const activeHit = this.mapState.isles.find(o => o.e.classList.contains('hit'));
+          if (activeHit) this.openSection(activeHit.id);
+        }
       });
     }
+
+    window.addEventListener('resize', () => {
+      if (!document.getElementById('shrineOverlay')?.classList.contains('active')) {
+        this.fit();
+      }
+    });
+  },
+
+  applyTransform() {
+    const { worldEl, vpEl, tx, ty, s } = this.mapState;
+    if (worldEl) worldEl.style.transform = `translate(${tx}px, ${ty}px) scale(${s})`;
+    if (vpEl) vpEl.classList.toggle('z1', s >= 0.75);
+  },
+
+  fit() {
+    const { W, H, vpEl } = this.mapState;
+    if (!vpEl) return;
+    const w = vpEl.clientWidth, h = vpEl.clientHeight;
+    this.mapState.s = Math.min(w / (W - 300), h / (H - 300));
+    this.mapState.tx = (w - W * this.mapState.s) / 2;
+    this.mapState.ty = (h - H * this.mapState.s) / 2;
+    this.applyTransform();
+  },
+
+  fly(x, y, z) {
+    const { worldEl, vpEl } = this.mapState;
+    if (!worldEl || !vpEl) return;
+    worldEl.classList.add('fly');
+    this.mapState.s = z;
+    this.mapState.tx = vpEl.clientWidth / 2 - x * z;
+    this.mapState.ty = vpEl.clientHeight / 2 - y * z;
+    this.applyTransform();
+    setTimeout(() => { worldEl.classList.remove('fly'); }, 850);
+  },
+
+  zoomAt(px, py, k) {
+    const ns = Math.max(0.15, Math.min(3, this.mapState.s * k));
+    k = ns / this.mapState.s;
+    this.mapState.tx = px - (px - this.mapState.tx) * k;
+    this.mapState.ty = py - (py - this.mapState.ty) * k;
+    this.mapState.s = ns;
+    this.applyTransform();
+  },
+
+  bindEvents() {
+    // Shrine close button
+    document.getElementById('shrineCloseBtn')?.addEventListener('click', () => this.closeSection());
+    document.getElementById('shrineOverlay')?.addEventListener('click', (e) => {
+      if (e.target === document.getElementById('shrineOverlay')) {
+        this.closeSection();
+      }
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        this.closeSection();
+        const dd = document.getElementById('searchDropdown');
+        if (dd) dd.style.display = 'none';
+      }
+    });
+
+    // Intercept in-page hash links (e.g. <a href="#uniques">)
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('a[href^="#"]');
+      if (a) {
+        const href = a.getAttribute('href').replace('#', '');
+        if (href && this.mapState.isles.some(i => i.id === href)) {
+          e.preventDefault();
+          this.openSection(href);
+        }
+      }
+    });
+  },
+
+  handleSearchDropdown(query) {
+    const dd = document.getElementById('searchDropdown');
+    if (!dd) return;
+    if (!query || query.length < 2) {
+      dd.style.display = 'none';
+      return;
+    }
+
+    const matches = this.searchIndex.filter(item => {
+      return item.title.toLowerCase().includes(query) ||
+             (item.snippet && item.snippet.toLowerCase().includes(query)) ||
+             (item.category && item.category.toLowerCase().includes(query));
+    }).slice(0, 8);
+
+    if (matches.length === 0) {
+      dd.style.display = 'none';
+      return;
+    }
+
+    dd.innerHTML = matches.map(m => `
+      <div class="search-item" onclick="App.openSection('${m.target}'); document.getElementById('searchDropdown').style.display='none';">
+        <div>
+          <span class="search-item-title">${m.title}</span>
+          <span class="search-item-cat">[${m.category}]</span>
+        </div>
+        ${m.snippet ? `<div class="search-item-snippet">${m.snippet}</div>` : ''}
+      </div>
+    `).join('');
+    dd.style.display = 'block';
+  },
+
+  openSection(secId) {
+    const item = this.mapState.isles.find(it => it.id === secId) || this.mapState.isles[0];
+    const overlay = document.getElementById('shrineOverlay');
+    const modal = document.getElementById('shrineModal');
+    const rune = document.getElementById('shrineRune');
+    const title = document.getElementById('shrineTitle');
+    const badge = document.getElementById('shrineBadge');
+    const badgeWrap = document.getElementById('shrineBadgeWrap');
+
+    if (!overlay || !modal) return;
+
+    modal.style.setProperty('--col', item.col || 'var(--gold)');
+    if (rune) rune.textContent = item.rn || 'ᛟ';
+    if (title) title.textContent = item.n || 'STB 3.0';
+    if (badge && badgeWrap) {
+      if (item.badge) {
+        badge.textContent = item.badge;
+        badgeWrap.style.display = 'block';
+      } else {
+        badgeWrap.style.display = 'none';
+      }
+    }
+
+    overlay.style.display = 'flex';
+    requestAnimationFrame(() => overlay.classList.add('active'));
+
+    // Center camera on island underneath
+    if (item.x && item.y) {
+      this.fly(item.x, item.y, 1.3);
+    }
+
+    history.replaceState(null, '', '#' + secId);
+
+    // Render the view
+    this.navigate(secId);
+  },
+
+  closeSection() {
+    const overlay = document.getElementById('shrineOverlay');
+    if (!overlay) return;
+    overlay.classList.remove('active');
+    setTimeout(() => {
+      overlay.style.display = 'none';
+    }, 250);
+    history.replaceState(null, '', '#');
   },
 
   async fetchData(filename) {
@@ -106,23 +436,38 @@ const App = {
     if (data) this.searchIndex = data;
   },
 
+  showToast(message, icon = 'ᛟ') {
+    let container = document.getElementById('toastContainer');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'toastContainer';
+      container.className = 'toast-container';
+      document.body.appendChild(container);
+    }
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.innerHTML = `<span style="font-family: var(--font-runic);">${icon}</span> <span>${message}</span>`;
+    container.appendChild(toast);
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transition = 'opacity 0.3s ease';
+      setTimeout(() => toast.remove(), 300);
+    }, 2800);
+  },
+
+  copyToClipboard(text, notifyText = 'Скопировано в буфер!') {
+    navigator.clipboard.writeText(text).then(() => {
+      this.showToast(notifyText);
+    }).catch(() => {
+      this.showToast(text, '📋');
+    });
+  },
+
   navigate(viewName) {
     this.currentView = viewName;
-
-    // Update active nav link
-    document.querySelectorAll('.nav-item').forEach(el => {
-      if (el.getAttribute('data-view') === viewName) {
-        el.classList.add('active');
-      } else {
-        el.classList.remove('active');
-      }
-    });
-
-    // Render corresponding view
     const mainView = document.getElementById('viewContent');
     if (!mainView) return;
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    mainView.scrollTop = 0;
 
     switch (viewName) {
       case 'overview':
@@ -177,152 +522,6 @@ const App = {
         this.renderOverview(mainView);
         break;
     }
-  },
-
-  // -------------------------------------------------------------
-  // TOAST SYSTEM
-  // -------------------------------------------------------------
-  showToast(message, icon = '✓') {
-    let container = document.getElementById('toastContainer');
-    if (!container) {
-      container = document.createElement('div');
-      container.id = 'toastContainer';
-      container.className = 'toast-container';
-      document.body.appendChild(container);
-    }
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.innerHTML = `<span>${icon}</span> <span>${message}</span>`;
-    container.appendChild(toast);
-    setTimeout(() => {
-      toast.style.opacity = '0';
-      toast.style.transition = 'opacity 0.3s ease';
-      setTimeout(() => toast.remove(), 300);
-    }, 2800);
-  },
-
-  copyToClipboard(text, notifyText = 'Скопировано в буфер!') {
-    navigator.clipboard.writeText(text).then(() => {
-      this.showToast(notifyText);
-    }).catch(() => {
-      this.showToast(text, '📋');
-    });
-  },
-
-  // -------------------------------------------------------------
-  // FAVORITES SYSTEM
-  // -------------------------------------------------------------
-  toggleFavorite(item) {
-    const idx = this.favorites.findIndex(f => f.title === item.title);
-    if (idx >= 0) {
-      this.favorites.splice(idx, 1);
-      this.showToast(`Удалено из закладок: ${item.title}`, '✕');
-    } else {
-      this.favorites.push(item);
-      this.showToast(`Добавлено в закладки: ${item.title}`, '★');
-    }
-    localStorage.setItem('stb_favorites', JSON.stringify(this.favorites));
-    this.updateFavoritesModalContent();
-  },
-
-  isFavorite(title) {
-    return this.favorites.some(f => f.title === title);
-  },
-
-  openFavoritesModal() {
-    const modal = document.getElementById('favoritesModal');
-    if (modal) {
-      this.updateFavoritesModalContent();
-      modal.classList.add('active');
-    }
-  },
-
-  closeFavoritesModal() {
-    const modal = document.getElementById('favoritesModal');
-    if (modal) modal.classList.remove('active');
-  },
-
-  updateFavoritesModalContent() {
-    const container = document.getElementById('favoritesList');
-    if (!container) return;
-    if (this.favorites.length === 0) {
-      container.innerHTML = `<p style="color: var(--text-muted); text-align: center; padding: 20px;">Нет сохраненных элементов. Нажимайте звездочку рядом с перками, уникальными предметами или заклинаниями, чтобы добавить их сюда.</p>`;
-      return;
-    }
-    container.innerHTML = this.favorites.map((fav, i) => `
-      <div class="search-result-item" style="margin-bottom: 8px;">
-        <div class="search-result-top">
-          <span class="search-result-title">${fav.title}</span>
-          <button onclick="App.toggleFavorite({title: '${fav.title}'})" style="background:none; border:none; color: var(--accent-red); cursor:pointer; font-size:1rem;">✕</button>
-        </div>
-        <div class="search-result-snippet">${fav.subtitle || ''}</div>
-      </div>
-    `).join('');
-  },
-
-  // -------------------------------------------------------------
-  // GLOBAL SEARCH MODAL
-  // -------------------------------------------------------------
-  openSearchModal() {
-    const modal = document.getElementById('searchModal');
-    const input = document.getElementById('searchModalInput');
-    if (modal) {
-      modal.classList.add('active');
-      if (input) {
-        input.value = '';
-        input.focus();
-        this.handleSearchInput('');
-      }
-    }
-  },
-
-  closeSearchModal() {
-    const modal = document.getElementById('searchModal');
-    if (modal) modal.classList.remove('active');
-  },
-
-  handleSearchInput(query) {
-    const list = document.getElementById('searchResultsList');
-    if (!list) return;
-    const q = query.trim().toLowerCase();
-    if (!q) {
-      list.innerHTML = `
-        <div style="text-align: center; color: var(--text-muted); padding: 30px;">
-          <p>Введите название способности, камня, бога, уникального предмета или заклинания...</p>
-          <p style="font-size: 0.8rem; margin-top: 8px;">Всего доступно более 1 250 записей по всей сборке</p>
-        </div>
-      `;
-      return;
-    }
-
-    const matches = this.searchIndex.filter(item => {
-      return item.title.toLowerCase().includes(q) ||
-             (item.snippet && item.snippet.toLowerCase().includes(q)) ||
-             (item.category && item.category.toLowerCase().includes(q));
-    }).slice(0, 40);
-
-    if (matches.length === 0) {
-      list.innerHTML = `<div style="text-align:center; color:var(--text-muted); padding: 30px;">Ничего не найдено по запросу "<strong>${query}</strong>"</div>`;
-      return;
-    }
-
-    list.innerHTML = matches.map(m => `
-      <div class="search-result-item" onclick="App.goToSearchResult('${m.target}', '${m.title}')">
-        <div class="search-result-top">
-          <span class="search-result-title">${m.title}</span>
-          <span class="search-result-cat">${m.category}</span>
-        </div>
-        <div class="search-result-snippet">${m.snippet || ''}</div>
-      </div>
-    `).join('');
-  },
-
-  goToSearchResult(targetView, title) {
-    this.closeSearchModal();
-    window.location.hash = targetView;
-    setTimeout(() => {
-      this.showToast(`Переход: ${title}`, '🔍');
-    }, 200);
   },
 
   // -------------------------------------------------------------

@@ -76,11 +76,11 @@ html, body {
 #vp::before {
   content: '';
   position: absolute;
-  inset: -30px;
-  background: linear-gradient(rgba(10, 16, 23, 0.42), rgba(7, 11, 16, 0.72)),
-              url('../img/bg_skyrim.jpg') center center / cover no-repeat;
-  filter: blur(4px);
-  transform: scale(1.04);
+  inset: -50px;
+  background: url('../img/bg_skyrim.jpg') center center / min(920px, 75vw) auto no-repeat;
+  opacity: 0.18;
+  filter: blur(8px);
+  transform: scale(1.02);
   pointer-events: none;
 }
 

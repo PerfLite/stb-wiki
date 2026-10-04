@@ -16,6 +16,7 @@ const App = {
     s: 1,
     tx: 0,
     ty: 0,
+    totalDragDist: 0,
     isles: [],
     worldEl: null,
     vpEl: null,
@@ -97,13 +98,26 @@ const App = {
       `<b class="rn">ᛟ</b>
        <h2>STB 3.0</h2>
        <i class="rule"></i>
-       <p>Skyrim True Believer. Вся вики на одной карте: приближайте раздел, чтобы исследовать содержимое.</p>
+       <p>Skyrim True Believer. Вся вики на одной карте: нажимайте на разделы, чтобы исследовать содержимое.</p>
        <div class="hub-btn-wrap">
          <button class="isle-btn" data-sec="overview">ᛟ Обзор сборки ᛟ</button>
        </div>`,
       'главная', 'overview'
     );
     isles.push({ e: hub, x: cx, y: cy, n: 'Главная', id: 'overview', col: 'var(--gold)', rn: 'ᛟ', badge: '' });
+
+    // Direct click listeners for Hub
+    hub.addEventListener('click', (ev) => {
+      if (this.mapState.totalDragDist > 8) return;
+      this.openSection('overview');
+    });
+    const hubBtn = hub.querySelector('.isle-btn');
+    if (hubBtn) {
+      hubBtn.addEventListener('click', (ev) => {
+        ev.stopPropagation();
+        this.openSection('overview');
+      });
+    }
 
     // Hub nav button
     const hubNavBtn = document.createElement('button');
@@ -134,6 +148,20 @@ const App = {
       isles.push({ e: e, x: x, y: y, n: r[0], id: r[4], col: 'var(--c' + r[2] + ')', rn: RN[i], badge: r[1] });
       svg.insertAdjacentHTML('beforeend', `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}"/>`);
 
+      // Direct click listeners on Island and Button
+      e.addEventListener('click', (ev) => {
+        if (this.mapState.totalDragDist > 8) return;
+        this.openSection(r[4]);
+      });
+      const islandBtn = e.querySelector('.isle-btn');
+      if (islandBtn) {
+        islandBtn.addEventListener('click', (ev) => {
+          ev.stopPropagation();
+          this.openSection(r[4]);
+        });
+      }
+
+      // Bottom nav button
       const b = document.createElement('button');
       b.innerHTML = `<span class="nav-rn">${RN[i]}</span> ${r[0]}`;
       b.onclick = () => { this.fly(x, y, 1.3); };
@@ -146,8 +174,10 @@ const App = {
   bindMapInteractions() {
     const vp = this.mapState.vpEl;
     const world = this.mapState.worldEl;
-    let P = {}, last = 0, startPos = {};
-    let isDragging = false;
+    let activePointers = {};
+    let lastPinch = 0;
+    let isPointerDown = false;
+    this.mapState.totalDragDist = 0;
 
     vp.addEventListener('wheel', (e) => {
       e.preventDefault();
@@ -155,77 +185,60 @@ const App = {
     }, { passive: false });
 
     vp.addEventListener('pointerdown', (e) => {
-      vp.setPointerCapture(e.pointerId);
-      P[e.pointerId] = [e.clientX, e.clientY];
-      startPos[e.pointerId] = [e.clientX, e.clientY];
+      if (e.target.closest('#bar, #nav, .shrine-overlay')) return;
+
+      isPointerDown = true;
+      this.mapState.totalDragDist = 0;
+      activePointers[e.pointerId] = [e.clientX, e.clientY];
       vp.classList.add('drag');
       world.classList.remove('fly');
+
       const hint = document.getElementById('hint');
       if (hint) hint.style.opacity = '0';
-      if (Object.keys(P).length === 2) {
-        const a = Object.values(P);
-        last = Math.hypot(a[0][0] - a[1][0], a[0][1] - a[1][1]);
+
+      if (Object.keys(activePointers).length === 2) {
+        const pts = Object.values(activePointers);
+        lastPinch = Math.hypot(pts[0][0] - pts[1][0], pts[0][1] - pts[1][1]);
       }
     });
 
-    vp.addEventListener('pointermove', (e) => {
-      const p = P[e.pointerId];
+    window.addEventListener('pointermove', (e) => {
+      if (!isPointerDown && !Object.keys(activePointers).length) return;
+      const p = activePointers[e.pointerId];
       if (!p) return;
-      const ids = Object.keys(P);
-      const start = startPos[e.pointerId];
-      if (start && Math.hypot(e.clientX - start[0], e.clientY - start[1]) > 5) {
-        isDragging = true;
-      }
+
+      const dx = e.clientX - p[0];
+      const dy = e.clientY - p[1];
+      this.mapState.totalDragDist += Math.hypot(dx, dy);
+      activePointers[e.pointerId] = [e.clientX, e.clientY];
+
+      const ids = Object.keys(activePointers);
       if (ids.length === 1) {
-        this.mapState.tx += e.clientX - p[0];
-        this.mapState.ty += e.clientY - p[1];
-        P[e.pointerId] = [e.clientX, e.clientY];
+        this.mapState.tx += dx;
+        this.mapState.ty += dy;
         this.applyTransform();
       } else if (ids.length === 2) {
-        P[e.pointerId] = [e.clientX, e.clientY];
-        const a = Object.values(P);
-        const d = Math.hypot(a[0][0] - a[1][0], a[0][1] - a[1][1]);
-        if (last) this.zoomAt((a[0][0] + a[1][0]) / 2, (a[0][1] + a[1][1]) / 2, d / last);
-        last = d;
+        const pts = Object.values(activePointers);
+        const d = Math.hypot(pts[0][0] - pts[1][0], pts[0][1] - pts[1][1]);
+        if (lastPinch) {
+          this.zoomAt((pts[0][0] + pts[1][0]) / 2, (pts[0][1] + pts[1][1]) / 2, d / lastPinch);
+        }
+        lastPinch = d;
       }
     });
 
-    const up = (e) => {
-      delete P[e.pointerId];
-      delete startPos[e.pointerId];
-      last = 0;
-      if (!Object.keys(P).length) {
+    const finishPointer = (e) => {
+      delete activePointers[e.pointerId];
+      if (Object.keys(activePointers).length === 0) {
+        isPointerDown = false;
+        lastPinch = 0;
         vp.classList.remove('drag');
-        setTimeout(() => { isDragging = false; }, 40);
+        setTimeout(() => { this.mapState.totalDragDist = 0; }, 60);
       }
     };
-    vp.addEventListener('pointerup', up);
-    vp.addEventListener('pointercancel', up);
 
-    // Clicking island cards
-    world.addEventListener('click', (e) => {
-      if (isDragging) return;
-
-      const btn = e.target.closest('.isle-btn');
-      if (btn) {
-        const secId = btn.getAttribute('data-sec');
-        if (secId) this.openSection(secId);
-        return;
-      }
-
-      const isleEl = e.target.closest('.isle');
-      if (isleEl) {
-        const secId = isleEl.getAttribute('data-sec');
-        const item = this.mapState.isles.find(i => i.id === secId);
-        if (item) {
-          if (this.mapState.s < 0.75) {
-            this.fly(item.x, item.y, 1.3);
-          } else {
-            this.openSection(secId);
-          }
-        }
-      }
-    });
+    window.addEventListener('pointerup', finishPointer);
+    window.addEventListener('pointercancel', finishPointer);
 
     // Top control buttons
     document.getElementById('home')?.addEventListener('click', () => {
@@ -261,7 +274,11 @@ const App = {
       qInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
           const activeHit = this.mapState.isles.find(o => o.e.classList.contains('hit'));
-          if (activeHit) this.openSection(activeHit.id);
+          if (activeHit) {
+            this.openSection(activeHit.id);
+            const dd = document.getElementById('searchDropdown');
+            if (dd) dd.style.display = 'none';
+          }
         }
       });
     }
@@ -378,6 +395,7 @@ const App = {
     const title = document.getElementById('shrineTitle');
     const badge = document.getElementById('shrineBadge');
     const badgeWrap = document.getElementById('shrineBadgeWrap');
+    const mainView = document.getElementById('viewContent');
 
     if (!overlay || !modal) return;
 
@@ -391,6 +409,10 @@ const App = {
       } else {
         badgeWrap.style.display = 'none';
       }
+    }
+
+    if (mainView) {
+      mainView.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--gold);"><p style="font-family: var(--font-title); font-size: 1.2rem;">ᛟ Открытие святилища... ᛟ</p></div>';
     }
 
     overlay.style.display = 'flex';
@@ -2083,6 +2105,7 @@ const App = {
 };
 
 // Initialize app when DOM is ready
+window.App = App;
 document.addEventListener('DOMContentLoaded', () => {
   App.init();
 });
